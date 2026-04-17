@@ -377,33 +377,34 @@
     letter-spacing: -1.5px;
   }
   .visualSide {
-    height: 380px;
+    height: 400px;
     margin-bottom: 2rem;
     transform: scale(0.75);
     transform-origin: top center;
     width: 100%;
   }
   .node {
-    left: 20% !important;
+    left: 10% !important;
   }
   .nodeIcon {
-    width: 45px;
-    height: 45px;
+    width: 48px;
+    height: 48px;
   }
   .iconLabel {
-    font-size: 0.6rem;
-    letter-spacing: 0;
+    font-size: 0.55rem;
+    letter-spacing: -0.2px;
   }
   .centerNode {
     left: 50%;
   }
   .outputNode {
-    right: 15%;
+    right: 10%;
   }
   .itemContent h3 {
     font-size: 1.15rem;
   }
 }
+
 
 
 
