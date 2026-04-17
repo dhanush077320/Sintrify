@@ -395,15 +395,27 @@
     letter-spacing: -0.2px;
   }
   .centerNode {
-    left: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  .coreInner {
+    width: 55px;
+    height: 55px;
+    font-size: 1.5rem;
   }
   .outputNode {
-    right: 10%;
+    right: 5%;
+    transform: translateY(-50%) scale(0.9);
+  }
+  .impactWrapper {
+    width: 65px;
+    height: 65px;
   }
   .itemContent h3 {
     font-size: 1.15rem;
   }
 }
+
 
 
 
