@@ -144,13 +144,13 @@
     padding: 130px 0 80px;
   }
   .stats {
-    flex-direction: column;
+    flex-direction: row;
     gap: 3rem;
   }
   .ctaGroup {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
   }
   .title {
     font-size: 3.5rem;
@@ -162,6 +162,7 @@
     font-size: 2.8rem;
   }
 }
+
 
 @media (max-width: 480px) {
   .hero {
@@ -176,12 +177,29 @@
     margin: 0 auto 3rem;
   }
   .ctaGroup {
+    flex-direction: row;
+    gap: 0.8rem;
     margin-bottom: 4rem;
   }
+  .ctaGroup :global(.btn-filled), 
+  .ctaGroup :global(.btn-outline) {
+    padding: 0.8rem 1rem;
+    font-size: 0.85rem;
+    min-width: 130px;
+  }
+  .stats {
+    flex-direction: row;
+    gap: 2rem;
+  }
   .count {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
+  }
+  .label {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
   }
   .contactDropdown {
     min-width: 190px;
   }
 }
+
