@@ -379,31 +379,32 @@
   .visualSide {
     height: 380px;
     margin-bottom: 2rem;
-    transform: scale(0.8);
+    transform: scale(0.75);
     transform-origin: top center;
-    width: 120%;
-    margin-left: -10%;
+    width: 100%;
   }
   .node {
-    left: 80px;
+    left: 15% !important;
   }
   .nodeIcon {
     width: 45px;
     height: 45px;
   }
   .iconLabel {
-    font-size: 0.55rem;
+    font-size: 0.6rem;
+    letter-spacing: 0;
   }
   .centerNode {
-    left: 55%;
+    left: 50%;
   }
   .outputNode {
-    right: 5%;
+    right: 15%;
   }
   .itemContent h3 {
     font-size: 1.15rem;
   }
 }
+
 
 
 
