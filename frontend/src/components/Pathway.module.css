@@ -372,12 +372,28 @@
     padding: 60px 0;
   }
   .title {
-    font-size: 2rem;
+    font-size: 2.1rem;
+    letter-spacing: -1.5px;
   }
   .visualSide {
-    display: none;
+    height: 250px;
+    margin-bottom: 2rem;
+  }
+  .node {
+    left: 45px;
+  }
+  .nodeIcon {
+    width: 38px;
+    height: 38px;
+  }
+  .centerNode {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  .outputNode {
+    right: 10%;
   }
   .itemContent h3 {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
   }
 }
+
