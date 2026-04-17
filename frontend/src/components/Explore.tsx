@@ -1,20 +1,4 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import styles from "./Explore.module.css";
-
-interface Project {
-  _id: string;
-  title: string;
-  caption: string;
-  fileUrl: string;
-  fileType: string;
-}
-
-interface ExploreProps {
-  onBack?: () => void;
-}
-
-const API_URL = "http://localhost:5000/api/projects";
+import { API_ENDPOINTS } from "../config";
 
 export default function Explore({ onBack }: ExploreProps) {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -23,7 +7,7 @@ export default function Explore({ onBack }: ExploreProps) {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await axios.get(API_URL);
+        const res = await axios.get(API_ENDPOINTS.PROJECTS);
         setProjects(res.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -54,11 +38,11 @@ export default function Explore({ onBack }: ExploreProps) {
             <div key={project._id} className={`${styles.card} glass`}>
               <div className={styles.media}>
                 {project.fileType.startsWith("image/") ? (
-                  <img src={`http://localhost:5000${project.fileUrl}`} alt={project.title} />
+                  <img src={`${API_ENDPOINTS.BASE}${project.fileUrl}`} alt={project.title} />
                 ) : (
                   <div className={styles.docPlaceholder}>
                     <span>📄</span>
-                    <a href={`http://localhost:5000${project.fileUrl}`} target="_blank" rel="noreferrer">
+                    <a href={`${API_ENDPOINTS.BASE}${project.fileUrl}`} target="_blank" rel="noreferrer">
                       View Document
                     </a>
                   </div>

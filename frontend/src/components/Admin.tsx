@@ -1,20 +1,4 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import styles from "./Admin.module.css";
-
-interface Project {
-  _id: string;
-  title: string;
-  caption: string;
-  fileUrl: string;
-  fileType: string;
-}
-
-interface AdminProps {
-  onLogout: () => void;
-}
-
-const API_URL = "http://localhost:5000/api/projects";
+import { API_ENDPOINTS } from "../config";
 
 export default function Admin({ onLogout }: AdminProps) {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -29,7 +13,7 @@ export default function Admin({ onLogout }: AdminProps) {
 
   const fetchProjects = async () => {
     try {
-      const res = await axios.get(API_URL);
+      const res = await axios.get(API_ENDPOINTS.PROJECTS);
       setProjects(res.data);
     } catch (error) {
       console.error("Error fetching projects:", error);
@@ -47,7 +31,7 @@ export default function Admin({ onLogout }: AdminProps) {
     formData.append("file", file);
 
     try {
-      await axios.post(API_URL, formData, {
+      await axios.post(API_ENDPOINTS.PROJECTS, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       setTitle("");
@@ -67,7 +51,7 @@ export default function Admin({ onLogout }: AdminProps) {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
 
     try {
-      await axios.delete(`${API_URL}/${id}`);
+      await axios.delete(`${API_ENDPOINTS.PROJECTS}/${id}`);
       fetchProjects();
     } catch (error) {
       console.error("Error deleting project:", error);
@@ -131,7 +115,7 @@ export default function Admin({ onLogout }: AdminProps) {
               <div key={project._id} className={`${styles.projectCard} glass`}>
                 <div className={styles.projectPreview}>
                   {project.fileType.startsWith("image/") ? (
-                    <img src={`http://localhost:5000${project.fileUrl}`} alt={project.title} />
+                    <img src={`${API_ENDPOINTS.BASE}${project.fileUrl}`} alt={project.title} />
                   ) : (
                     <div className={styles.docIcon}>📄 {project.fileType.split("/")[1].toUpperCase()}</div>
                   )}

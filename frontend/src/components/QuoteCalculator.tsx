@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "./QuoteCalculator.module.css";
+import { API_ENDPOINTS } from "../config";
 
 const SERVICES = [
   { 
@@ -71,7 +72,7 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/leads", {
+      await axios.post(API_ENDPOINTS.LEADS, {
         ...formData,
         services: selected.map(id => SERVICES.find(s => s.id === id)?.label),
         estimate: total
