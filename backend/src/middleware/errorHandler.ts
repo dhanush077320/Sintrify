@@ -8,9 +8,9 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     return res.status(400).json({
       success: false,
       message: "Validation Error",
-      errors: err.errors.map((e) => ({
-        path: e.path.join("."),
-        message: e.message,
+      errors: err.issues.map((issue) => ({
+        path: issue.path.join("."),
+        message: issue.message,
       })),
     });
   }
