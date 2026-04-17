@@ -1,0 +1,215 @@
+.section {
+  padding: 120px 0;
+  background-color: var(--bg-page);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  display: block;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 950;
+  letter-spacing: -3.5px;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* Balanced 4-column balanced grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1300px;
+  margin: 0 auto 100px;
+  padding: 0 1.5rem;
+}
+
+.doodleCard {
+  background-color: var(--bg-surface);
+  border: var(--border-width) solid var(--border);
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: var(--transition-smooth);
+}
+
+.doodleCard:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  background-color: var(--bg-glass);
+}
+
+.visual {
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.visual svg {
+  width: 90px;
+  height: 90px;
+  opacity: 0.8;
+  transition: var(--transition-smooth);
+}
+
+.doodleCard:hover .visual svg {
+  opacity: 1;
+  color: var(--primary);
+}
+
+.metricBadge {
+  position: absolute;
+  bottom: 0px;
+  background: var(--bg-glass);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  border: var(--border-width) solid var(--border);
+  letter-spacing: 1px;
+}
+
+.category {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.studyTitle {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 0.8rem;
+  letter-spacing: -1px;
+}
+
+.studyDesc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 250px;
+}
+
+/* Concept Slider Section */
+.evolution {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: center;
+  border-radius: 32px;
+}
+
+.evoTitle {
+  font-size: 2.8rem;
+  font-weight: 900;
+  margin: 1rem 0;
+  letter-spacing: -2px;
+}
+
+.sliderBox {
+  position: relative;
+  aspect-ratio: 16/10;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+  border: var(--border-width) solid var(--border);
+}
+
+.view {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.range {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 10;
+  cursor: ew-resize;
+}
+
+.handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #fff;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+}
+
+/* Specific reference feel */
+[data-theme="light"] .doodleCard {
+  background-color: #f9f9f9;
+  border-color: #eee;
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .evolution {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

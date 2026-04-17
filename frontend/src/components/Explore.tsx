@@ -1,0 +1,83 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import styles from "./Explore.module.css";
+
+interface Project {
+  _id: string;
+  title: string;
+  caption: string;
+  fileUrl: string;
+  fileType: string;
+}
+
+interface ExploreProps {
+  onBack?: () => void;
+}
+
+const API_URL = "http://localhost:5000/api/projects";
+
+export default function Explore({ onBack }: ExploreProps) {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const res = await axios.get(API_URL);
+        setProjects(res.data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  if (loading) return <div className={styles.loading}>Loading Sintrify Universe...</div>;
+
+  return (
+    <section className={styles.explore} id="explore">
+      <div className={styles.container}>
+        {onBack && (
+          <button className="btn-outline" style={{ marginBottom: '2rem' }} onClick={onBack}>
+            ← Back to Home
+          </button>
+        )}
+        <header className={styles.header}>
+          <h2 className={styles.title}>Explore our <span className="text-gradient">Portfolio</span></h2>
+          <p className={styles.subtitle}>Discover our latest projects and high-performance engineering.</p>
+        </header>
+
+        <div className={styles.grid}>
+          {projects.map((project) => (
+            <div key={project._id} className={`${styles.card} glass`}>
+              <div className={styles.media}>
+                {project.fileType.startsWith("image/") ? (
+                  <img src={`http://localhost:5000${project.fileUrl}`} alt={project.title} />
+                ) : (
+                  <div className={styles.docPlaceholder}>
+                    <span>📄</span>
+                    <a href={`http://localhost:5000${project.fileUrl}`} target="_blank" rel="noreferrer">
+                      View Document
+                    </a>
+                  </div>
+                )}
+              </div>
+              <div className={styles.info}>
+                <h3>{project.title}</h3>
+                {project.caption && <p>{project.caption}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {projects.length === 0 && (
+          <div className={styles.empty}>
+            <p>The universe is currently being architected. Check back soon!</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}

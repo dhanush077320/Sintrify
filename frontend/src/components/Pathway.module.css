@@ -1,0 +1,383 @@
+.pathway {
+  padding: 120px 0;
+  background-color: var(--bg-page);
+  position: relative;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 950;
+  letter-spacing: -3.5px;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 1.15rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.mainContent {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: center;
+  margin: 60px 0;
+}
+
+.visualSide {
+  position: relative;
+  height: 550px;
+}
+
+.networkContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.backgroundSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.flowPath {
+  stroke: var(--primary);
+  stroke-width: 2;
+  fill: none;
+  opacity: 0.15;
+  stroke-dasharray: 5, 5;
+  animation: flow 20s linear infinite;
+  transition: opacity 0.4s ease, stroke-width 0.4s ease;
+}
+
+.pathActive {
+  opacity: 0.8;
+  stroke-width: 3;
+}
+
+@keyframes flow {
+  from { stroke-dashoffset: 200; }
+  to { stroke-dashoffset: 0; }
+}
+
+.inputNodes {
+  position: absolute;
+  left: 100px;
+  width: 0;
+  height: 0;
+}
+
+.node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  /* Shift only by half icon height to keep icon center on the 'top' coordinate */
+  transform: translate(-50%, -27.5px); 
+  transition: var(--transition-smooth);
+  cursor: pointer;
+  left: 100px;
+}
+
+.nodeIcon {
+  width: 55px;
+  height: 55px;
+  background: var(--bg-surface);
+  border: var(--border-width) solid var(--border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-main);
+  box-shadow: var(--shadow-elite);
+}
+
+.iconLabel {
+  font-size: 0.7rem;
+  font-weight: 850;
+  color: var(--text-main);
+  white-space: nowrap;
+  opacity: 0.7;
+  transition: var(--transition-smooth);
+  pointer-events: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+.active .iconLabel {
+  opacity: 1;
+  color: var(--primary);
+  transform: translateX(5px);
+}
+
+.centerNode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.corePulse {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coreInner {
+  width: 50px;
+  height: 50px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 950;
+  color: white;
+  z-index: 2;
+  box-shadow: 0 0 25px var(--primary);
+}
+
+.pulseRing {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  opacity: 0;
+  animation: pulse 3s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+.coreLabel {
+  font-size: 0.55rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-top: -0.5rem;
+}
+
+.outputNode {
+  position: absolute;
+  right: 17%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.impactWrapper {
+  width: 70px;
+  height: 70px;
+  background: var(--bg-glass);
+  border: var(--border-width) solid var(--primary);
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  box-shadow: var(--shadow-elite);
+}
+
+.nodeLabel {
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: var(--text-main);
+  text-transform: uppercase;
+}
+
+/* Text Side */
+.textSide {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.processItem {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 20px;
+  border: var(--border-width) solid transparent;
+  transition: var(--transition-smooth);
+  cursor: default;
+}
+
+.activeItem {
+  background: var(--bg-glass);
+  border-color: var(--border);
+  transform: translateX(10px);
+}
+
+.itemNumber {
+  font-size: 1.5rem;
+  font-weight: 950;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.itemContent h3 {
+  font-size: 1.35rem;
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.itemContent p {
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.about {
+  margin-top: 100px;
+  padding: 0 5%;
+}
+
+.aboutContent {
+  text-align: left;
+}
+
+.aboutContent h3 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin-bottom: 2rem;
+  letter-spacing: -1px;
+  color: var(--text-main);
+}
+
+.aboutBody p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 850px;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.aboutBody strong {
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+@media (max-width: 1100px) {
+  .mainContent {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .visualSide {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pathway {
+    padding: 80px 0;
+  }
+  .title {
+    font-size: 2.5rem;
+    letter-spacing: -2px;
+  }
+  .header {
+    margin-bottom: 50px;
+  }
+  .visualSide {
+    height: 300px;
+  }
+  .node {
+    left: 60px;
+  }
+  .nodeIcon {
+    width: 42px;
+    height: 42px;
+  }
+  .iconLabel {
+    font-size: 0.6rem;
+  }
+  .coreInner {
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
+  }
+  .corePulse {
+    width: 60px;
+    height: 60px;
+  }
+  .impactWrapper {
+    width: 55px;
+    height: 55px;
+  }
+  .about {
+    margin-top: 60px;
+    padding: 0;
+  }
+  .aboutContent h3 {
+    font-size: 1.8rem;
+  }
+  .aboutBody p {
+    font-size: 1rem;
+  }
+  .processItem {
+    padding: 1rem;
+  }
+  .activeItem {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .pathway {
+    padding: 60px 0;
+  }
+  .title {
+    font-size: 2rem;
+  }
+  .visualSide {
+    display: none;
+  }
+  .itemContent h3 {
+    font-size: 1.1rem;
+  }
+}

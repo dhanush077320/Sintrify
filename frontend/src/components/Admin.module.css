@@ -1,0 +1,232 @@
+.adminContainer {
+  min-height: 100vh;
+  background: var(--bg-page);
+  color: var(--text-main);
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.adminNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 4rem;
+  border-bottom: 1.5px solid var(--border);
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+}
+
+.logo span:last-child {
+  background: var(--primary);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
+.content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem;
+}
+
+.header {
+  margin-bottom: 4rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.uploadSection {
+  padding: 3rem;
+  margin-bottom: 5rem;
+  animation: slideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.uploadSection h2 {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.uploadForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 800px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.inputGroup label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.inputGroup input, .inputGroup textarea {
+  padding: 1.2rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  transition: var(--transition-smooth);
+}
+
+.inputGroup textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.inputGroup input:focus, .inputGroup textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.projectsList h2 {
+  margin-bottom: 3rem;
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.projectCard {
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  border: 1px solid var(--border);
+}
+
+.projectCard:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+}
+
+.projectPreview {
+  width: 100%;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.projectPreview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.docIcon {
+  font-size: 3rem;
+}
+
+.projectInfo {
+  padding: 1.5rem;
+}
+
+.projectInfo h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.projectInfo p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.deleteBtn {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1.5px solid #ef4444;
+  color: #ef4444;
+  background: transparent;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.deleteBtn:hover {
+  background: #ef4444;
+  color: white;
+}
+
+.emptyMsg {
+  text-align: center;
+  padding: 4rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .adminNav {
+    padding: 1rem 1.5rem;
+  }
+  .content {
+    padding: 2rem 1.5rem;
+  }
+  .header h1 {
+    font-size: 2rem;
+  }
+  .uploadSection {
+    padding: 1.5rem;
+  }
+  .projectGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 1.6rem;
+  }
+  .content {
+    padding: 1.5rem 1rem;
+  }
+}

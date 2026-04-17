@@ -1,0 +1,18 @@
+.marqueeContainer {
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-page);
+  padding: 40px 0;
+  position: relative;
+}
+
+.marqueeContent {
+  display: flex;
+  width: max-content;
+  animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

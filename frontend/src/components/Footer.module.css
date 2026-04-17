@@ -1,0 +1,156 @@
+.footer {
+  padding: 100px 0 60px;
+  background-color: var(--bg-page);
+  border-top: var(--border-width) solid var(--border);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  gap: 4rem;
+}
+
+.brandCol {
+  flex: 1;
+  max-width: 400px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  color: var(--text-main);
+  margin-bottom: 1.5rem;
+}
+
+.logo span {
+  background: linear-gradient(135deg, var(--primary), #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dot {
+  color: var(--primary) !important;
+  -webkit-text-fill-color: var(--primary) !important;
+}
+
+.tagline {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.linksRow {
+  flex: 2;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6rem;
+}
+
+.col h4 {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: var(--text-main);
+  margin-bottom: 2rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.col a, .col p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.col a:hover {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.bottomRow {
+  padding-top: 40px;
+  border-top: var(--border-width) solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.copyright span {
+  color: var(--text-main);
+}
+
+.legal {
+  display: flex;
+  gap: 2rem;
+}
+
+.legal a {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.legal a:hover {
+  color: var(--text-main);
+}
+
+@media (max-width: 1024px) {
+  .topRow {
+    flex-direction: column;
+    gap: 4rem;
+  }
+  .linksRow {
+    justify-content: flex-start;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .linksRow {
+    flex-wrap: wrap;
+    gap: 3rem;
+  }
+  .bottomRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+}
+@media (max-width: 480px) {
+  .logo {
+    font-size: 1.6rem;
+  }
+  .tagline {
+    font-size: 0.95rem;
+  }
+  .copyright {
+    font-size: 0.7rem;
+  }
+  .legal {
+    gap: 1rem;
+  }
+}
