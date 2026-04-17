@@ -1,4 +1,20 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import styles from "./Admin.module.css";
 import { API_ENDPOINTS } from "../config";
+
+interface Project {
+  _id: string;
+  title: string;
+  caption: string;
+  fileUrl: string;
+  fileType: string;
+}
+
+interface AdminProps {
+  onLogout: () => void;
+}
+
 
 export default function Admin({ onLogout }: AdminProps) {
   const [projects, setProjects] = useState<Project[]>([]);

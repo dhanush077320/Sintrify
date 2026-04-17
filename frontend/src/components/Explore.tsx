@@ -1,4 +1,20 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+import styles from "./Explore.module.css";
 import { API_ENDPOINTS } from "../config";
+
+interface Project {
+  _id: string;
+  title: string;
+  caption: string;
+  fileUrl: string;
+  fileType: string;
+}
+
+interface ExploreProps {
+  onBack?: () => void;
+}
+
 
 export default function Explore({ onBack }: ExploreProps) {
   const [projects, setProjects] = useState<Project[]>([]);
