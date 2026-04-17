@@ -377,41 +377,33 @@
     letter-spacing: -1.5px;
   }
   .visualSide {
-    height: 420px;
-    margin-bottom: 3rem;
-    transform: scale(0.9);
+    height: 380px;
+    margin-bottom: 2rem;
+    transform: scale(0.8);
+    transform-origin: top center;
+    width: 120%;
+    margin-left: -10%;
   }
   .node {
-    left: 40px;
-    --node-top: unset !important;
+    left: 80px;
   }
-  .node:nth-child(1) { top: 50px !important; }
-  .node:nth-child(2) { top: 150px !important; }
-  .node:nth-child(3) { top: 250px !important; }
-
-  .backgroundSvg {
-    display: none; /* Hide complex paths on mobile for clarity */
-  }
-
   .nodeIcon {
     width: 45px;
     height: 45px;
   }
+  .iconLabel {
+    font-size: 0.55rem;
+  }
   .centerNode {
-    top: 50%;
-    right: 15%;
-    left: unset;
-    transform: translateY(-50%) scale(0.9);
+    left: 55%;
   }
   .outputNode {
-    bottom: 20px;
-    top: unset;
-    right: 35%;
-    transform: none;
+    right: 5%;
   }
   .itemContent h3 {
     font-size: 1.15rem;
   }
 }
+
 
 
