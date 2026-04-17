@@ -104,6 +104,7 @@
   transition: var(--transition-smooth);
   cursor: pointer;
   left: 100px;
+  top: var(--node-top);
 }
 
 .nodeIcon {
@@ -376,24 +377,41 @@
     letter-spacing: -1.5px;
   }
   .visualSide {
-    height: 250px;
-    margin-bottom: 2rem;
+    height: 420px;
+    margin-bottom: 3rem;
+    transform: scale(0.9);
   }
   .node {
-    left: 45px;
+    left: 40px;
+    --node-top: unset !important;
   }
+  .node:nth-child(1) { top: 50px !important; }
+  .node:nth-child(2) { top: 150px !important; }
+  .node:nth-child(3) { top: 250px !important; }
+
+  .backgroundSvg {
+    display: none; /* Hide complex paths on mobile for clarity */
+  }
+
   .nodeIcon {
-    width: 38px;
-    height: 38px;
+    width: 45px;
+    height: 45px;
   }
   .centerNode {
-    transform: translate(-50%, -50%) scale(0.8);
+    top: 50%;
+    right: 15%;
+    left: unset;
+    transform: translateY(-50%) scale(0.9);
   }
   .outputNode {
-    right: 10%;
+    bottom: 20px;
+    top: unset;
+    right: 35%;
+    transform: none;
   }
   .itemContent h3 {
     font-size: 1.15rem;
   }
 }
+
 

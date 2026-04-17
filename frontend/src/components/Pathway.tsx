@@ -71,7 +71,7 @@ export default function Pathway() {
                    <div 
                     key={node.id} 
                     className={`${styles.node} ${activeNodeId === node.id ? styles.active : ""}`}
-                    style={{ top: `${175 + i * 100}px` }}
+                    style={{ "--node-top": `${175 + i * 100}px` } as any}
                     onMouseEnter={() => setActiveNodeId(node.id)}
                    >
                      <div className={styles.nodeIcon}><node.icon /></div>
