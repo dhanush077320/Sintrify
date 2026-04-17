@@ -88,9 +88,8 @@
 
 .inputNodes {
   position: absolute;
-  left: 100px;
-  width: 0;
-  height: 0;
+  inset: 0;
+  pointer-events: none;
 }
 
 .node {
@@ -103,8 +102,9 @@
   transform: translate(-50%, -27.5px); 
   transition: var(--transition-smooth);
   cursor: pointer;
-  left: 100px;
+  left: 150px;
   top: var(--node-top);
+  pointer-events: auto;
 }
 
 .nodeIcon {
@@ -384,7 +384,7 @@
     width: 100%;
   }
   .node {
-    left: 15% !important;
+    left: 20% !important;
   }
   .nodeIcon {
     width: 45px;
@@ -404,6 +404,7 @@
     font-size: 1.15rem;
   }
 }
+
 
 
 
