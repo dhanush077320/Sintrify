@@ -57,12 +57,12 @@ export default function Pathway() {
             <div className={styles.networkContainer}>
               <svg className={styles.backgroundSvg} viewBox="0 0 600 550">
                 {/* Responsive coordinates: 80 for mobile (scale-adjusted), 130 for desktop */}
-                <path d="M80 175 Q 300 175 300 275" className={`${styles.flowPath} ${activeNodeId === 'analyzing' ? styles.pathActive : ''}`} />
-                <path d="M80 275 H 300" className={`${styles.flowPath} ${activeNodeId === 'strategy' ? styles.pathActive : ''}`} />
-                <path d="M80 375 Q 300 375 300 275" className={`${styles.flowPath} ${activeNodeId === 'service' ? styles.pathActive : ''}`} />
+                <path d="M80 175 Q 300 175 300 285" className={`${styles.flowPath} ${activeNodeId === 'analyzing' ? styles.pathActive : ''}`} />
+                <path d="M80 275 H 300" className={`${styles.flowPath} ${activeNodeId === 'strategy' ? styles.pathActive : ''}`} style={{ transform: 'translateY(10px)' }} />
+                <path d="M80 375 Q 300 375 300 285" className={`${styles.flowPath} ${activeNodeId === 'service' ? styles.pathActive : ''}`} />
                 
                 {/* Center to Right connection */}
-                <path d="M300 275 H 550" className={styles.flowPath} />
+                <path d="M300 285 H 550" className={styles.flowPath} />
               </svg>
 
               {/* Input Nodes (Visible and Interactive) */}

@@ -396,6 +396,7 @@
   }
   .centerNode {
     left: 50%;
+    top: 52%;
     transform: translate(-50%, -50%) scale(0.9);
   }
   .coreInner {
@@ -405,6 +406,7 @@
   }
   .outputNode {
     right: 8.4%;
+    top: 52%;
     transform: translateY(-50%) scale(0.9);
   }
   .impactWrapper {
