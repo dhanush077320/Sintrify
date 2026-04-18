@@ -37,6 +37,9 @@ export default function Admin({ onLogout }: AdminProps) {
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isSavingStats, setIsSavingStats] = useState(false);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editCaption, setEditCaption] = useState("");
 
   useEffect(() => {
     fetchProjects();
@@ -114,6 +117,36 @@ export default function Admin({ onLogout }: AdminProps) {
       setIsUploading(false);
     }
   };
++
++  const startEditing = (project: Project) => {
++    setEditingProject(project);
++    setEditTitle(project.title);
++    setEditCaption(project.caption);
++    window.scrollTo({ top: 0, behavior: 'smooth' });
++  };
++
++  const handleUpdateProject = async (e: React.FormEvent) => {
++    e.preventDefault();
++    if (!editingProject) return;
++
++    setIsUploading(true);
++    try {
++      await axios.put(`${API_ENDPOINTS.PROJECTS}/${editingProject._id}`, {
++        title: editTitle,
++        caption: editCaption
++      });
++      setEditingProject(null);
++      setEditTitle("");
++      setEditCaption("");
++      fetchProjects();
++      alert("Project updated successfully!");
++    } catch (error) {
++      console.error("Error updating project:", error);
++      alert("Failed to update project.");
++    } finally {
++      setIsUploading(false);
++    }
++  };
 
   const handleDeleteProject = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
@@ -251,14 +284,14 @@ export default function Admin({ onLogout }: AdminProps) {
             </header>
 
             <section className={`${styles.uploadSection} glass`}>
-              <h2>Upload New Project</h2>
-              <form onSubmit={handleUpload} className={styles.uploadForm}>
+              <h2>{editingProject ? "Edit Project" : "Upload New Project"}</h2>
+              <form onSubmit={editingProject ? handleUpdateProject : handleUpload} className={styles.uploadForm}>
                 <div className={styles.inputGroup}>
                   <label>Project Title</label>
                   <input 
                     type="text" 
-                    value={title} 
-                    onChange={(e) => setTitle(e.target.value)} 
+                    value={editingProject ? editTitle : title} 
+                    onChange={(e) => editingProject ? setEditTitle(e.target.value) : setTitle(e.target.value)} 
                     placeholder="Enter project title"
                     required
                   />
@@ -266,22 +299,35 @@ export default function Admin({ onLogout }: AdminProps) {
                 <div className={styles.inputGroup}>
                   <label>Caption</label>
                   <textarea 
-                    value={caption} 
-                    onChange={(e) => setCaption(e.target.value)} 
+                    value={editingProject ? editCaption : caption} 
+                    onChange={(e) => editingProject ? setEditCaption(e.target.value) : setCaption(e.target.value)} 
                     placeholder="Enter project description OR paste a website link (e.g. https://google.com)"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label>File (Image or Document)</label>
-                  <input 
-                    type="file" 
-                    onChange={(e) => setFile(e.target.files?.[0] || null)} 
-                    required
-                  />
+                {!editingProject && (
+                  <div className={styles.inputGroup}>
+                    <label>File (Image or Document)</label>
+                    <input 
+                      type="file" 
+                      onChange={(e) => setFile(e.target.files?.[0] || null)} 
+                      required
+                    />
+                  </div>
+                )}
+                <div className={styles.formActions}>
+                  <button type="submit" className="btn-filled" disabled={isUploading}>
+                    {isUploading ? "Processing..." : (editingProject ? "Save Changes" : "Upload Project")}
+                  </button>
+                  {editingProject && (
+                    <button 
+                      type="button" 
+                      className="btn-outline" 
+                      onClick={() => setEditingProject(null)}
+                    >
+                      Cancel
+                    </button>
+                  )}
                 </div>
-                <button type="submit" className="btn-filled" disabled={isUploading}>
-                  {isUploading ? "Uploading..." : "Upload Project"}
-                </button>
               </form>
             </section>
 
@@ -300,12 +346,20 @@ export default function Admin({ onLogout }: AdminProps) {
                     <div className={styles.projectInfo}>
                       <h3>{project.title}</h3>
                       <p>{project.caption}</p>
-                      <button 
-                        className={styles.deleteBtn} 
-                        onClick={() => handleDeleteProject(project._id)}
-                      >
-                        Delete Project
-                      </button>
+                      <div className={styles.projectActions}>
+                        <button 
+                          className="btn-outline" 
+                          onClick={() => startEditing(project)}
+                        >
+                          Edit Details
+                        </button>
+                        <button 
+                          className={styles.deleteBtn} 
+                          onClick={() => handleDeleteProject(project._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}

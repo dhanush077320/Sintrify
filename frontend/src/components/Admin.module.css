@@ -302,8 +302,13 @@
   overflow: hidden;
 }
 
+.projectActions {
+  display: flex;
+  gap: 1rem;
+}
+
 .deleteBtn {
-  width: 100%;
+  flex: 1;
   padding: 0.8rem;
   border-radius: 8px;
   border: 1.5px solid #ef4444;
@@ -317,6 +322,15 @@
 .deleteBtn:hover {
   background: #ef4444;
   color: white;
+}
+
+.formActions {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.formActions button {
+  flex: 1;
 }
 
 .emptyMsg {
