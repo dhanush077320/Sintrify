@@ -72,7 +72,11 @@ export const updateProject = async (req: Request, res: Response) => {
     
     await project.save();
     res.status(200).json(project);
-  } catch (error) {
-    res.status(500).json({ message: "Error updating project", error });
+  } catch (error: any) {
+    console.error("Detailed Update Error:", error);
+    res.status(500).json({ 
+      message: "Error updating project", 
+      error: error.message || "Unknown server error" 
+    });
   }
 };

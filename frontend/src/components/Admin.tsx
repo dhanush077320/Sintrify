@@ -147,9 +147,10 @@ export default function Admin({ onLogout }: AdminProps) {
       setFile(null);
       fetchProjects();
       alert("Project updated successfully!");
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error updating project:", error);
-      alert("Failed to update project.");
+      const errorMsg = error.response?.data?.error || error.response?.data?.message || "Failed to update project. Please try again.";
+      alert(errorMsg);
     } finally {
       setIsUploading(false);
     }
