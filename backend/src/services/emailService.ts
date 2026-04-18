@@ -17,10 +17,12 @@ const createTransporter = () => {
 export const sendLeadNotification = async (lead: ILead) => {
   console.log("Attempting to send notification for lead:", lead.name);
   
-  const transporter = createTransporter();
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
     console.error("❌ EMAIL ERROR: Credentials missing in .env or Render Environment Variables.");
     return;
   }
+
+  const transporter = createTransporter();
 
   const mailOptions = {
     from: `"Sintrify Engine" <${process.env.EMAIL_USER}>`,
