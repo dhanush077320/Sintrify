@@ -9,6 +9,7 @@ export default function CountUp({ end, duration = 2000 }: CountUpProps) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    setCount(0); // Reset count whenever target changes
     let startTime: number | null = null;
     let animationFrame: number;
 

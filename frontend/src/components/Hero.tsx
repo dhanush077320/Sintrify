@@ -11,7 +11,7 @@ interface HeroProps {
 
 export default function Hero({ onExplore, onStartProject }: HeroProps) {
   const [showContacts, setShowContacts] = useState(false);
-  const [stats, setStats] = useState({ happyClients: 35, projectsDelivered: 36 });
+  const [stats, setStats] = useState({ happyClients: 0, projectsDelivered: 0 });
 
   useEffect(() => {
     const fetchStats = async () => {
