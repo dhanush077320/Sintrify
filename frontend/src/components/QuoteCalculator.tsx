@@ -51,6 +51,19 @@ const SERVICES = [
         <circle cx="10" cy="10" r="3" />
       </svg>
     )
+  },
+  { 
+    id: "software", 
+    label: "Software Development", 
+    base: 3000, 
+    icon: (props: any) => (
+      <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M16 18L20 22L21 21L17 17L16 18Z" />
+        <path d="M7 8L3 12L7 16" />
+        <path d="M17 8L21 12L17 16" />
+        <path d="M14 4L10 20" />
+      </svg>
+    )
   }
 ];
 
