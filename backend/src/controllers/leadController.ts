@@ -37,7 +37,7 @@ export const fetchLeads = async (req: Request, res: Response, next: NextFunction
 
 export const removeLead = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await leadService.deleteLead(req.params.id);
+    await leadService.deleteLead(req.params.id as string);
     res.json({ success: true, message: "Lead record deleted" });
   } catch (error) {
     next(error);

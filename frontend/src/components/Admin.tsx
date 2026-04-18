@@ -86,6 +86,17 @@ export default function Admin({ onLogout }: AdminProps) {
     }
   };
 
+  const handleDeleteProject = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this project?")) return;
+    try {
+      await axios.delete(`${API_ENDPOINTS.PROJECTS}/${id}`);
+      fetchProjects();
+    } catch (error) {
+      console.error("Error deleting project:", error);
+      alert("Failed to delete project. Check if backend is running.");
+    }
+  };
+
   const handleDeleteLead = async (id: string) => {
     if (!window.confirm("Delete this lead record permanently?")) return;
     try {
@@ -93,6 +104,7 @@ export default function Admin({ onLogout }: AdminProps) {
       fetchLeads();
     } catch (error) {
       console.error("Error deleting lead:", error);
+      alert("Failed to delete lead. Check if backend is running.");
     }
   };
 
@@ -215,7 +227,7 @@ export default function Admin({ onLogout }: AdminProps) {
                       <p>{project.caption}</p>
                       <button 
                         className={styles.deleteBtn} 
-                        onClick={() => handleDelete(project._id)}
+                        onClick={() => handleDeleteProject(project._id)}
                       >
                         Delete Project
                       </button>
