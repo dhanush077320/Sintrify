@@ -338,7 +338,10 @@ export default function Admin({ onLogout }: AdminProps) {
                   <div key={project._id} className={`${styles.projectCard} glass`}>
                     <div className={styles.projectPreview}>
                       {project.fileType.startsWith("image/") ? (
-                        <img src={`${API_ENDPOINTS.BASE}${project.fileUrl}`} alt={project.title} />
+                        <img 
+                          src={project.fileUrl.startsWith("http") ? project.fileUrl : `${API_ENDPOINTS.BASE}${project.fileUrl}`} 
+                          alt={project.title} 
+                        />
                       ) : (
                         <div className={styles.docIcon}>📄 {project.fileType.split("/")[1].toUpperCase()}</div>
                       )}

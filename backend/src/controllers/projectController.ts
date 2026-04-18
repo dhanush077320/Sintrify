@@ -15,7 +15,7 @@ export const uploadProject = async (req: Request, res: Response) => {
     const newProject = new Project({
       title,
       caption,
-      fileUrl: `/uploads/${file.filename}`,
+      fileUrl: (file as any).path,
       fileType: file.mimetype
     });
 
@@ -42,12 +42,6 @@ export const deleteProject = async (req: Request, res: Response) => {
 
     if (!project) {
       return res.status(404).json({ message: "Project not found" });
-    }
-
-    // Delete file from filesystem
-    const filePath = path.join(__dirname, "../../", project.fileUrl);
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath);
     }
 
     await Project.findByIdAndDelete(id);

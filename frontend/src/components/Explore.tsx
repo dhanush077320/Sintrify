@@ -54,11 +54,18 @@ export default function Explore({ onBack }: ExploreProps) {
             <div key={project._id} className={`${styles.card} glass`}>
               <div className={styles.media}>
                 {project.fileType.startsWith("image/") ? (
-                  <img src={`${API_ENDPOINTS.BASE}${project.fileUrl}`} alt={project.title} />
+                  <img 
+                    src={project.fileUrl.startsWith("http") ? project.fileUrl : `${API_ENDPOINTS.BASE}${project.fileUrl}`} 
+                    alt={project.title} 
+                  />
                 ) : (
                   <div className={styles.docPlaceholder}>
                     <span>📄</span>
-                    <a href={`${API_ENDPOINTS.BASE}${project.fileUrl}`} target="_blank" rel="noreferrer">
+                    <a 
+                      href={project.fileUrl.startsWith("http") ? project.fileUrl : `${API_ENDPOINTS.BASE}${project.fileUrl}`} 
+                      target="_blank" 
+                      rel="noreferrer"
+                    >
                       View Document
                     </a>
                   </div>
