@@ -198,7 +198,7 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
                   />
                 </div>
                 <div className={styles.inputGroup}>
-                  <label>Phone Number</label>
+                  <label>Whatsapp Number</label>
                   <input 
                     type="tel" required placeholder="+91 98765 43210" 
                     value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})}

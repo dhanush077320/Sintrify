@@ -36,6 +36,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.removeLead = exports.fetchLeads = exports.submitLead = void 0;
 const zod_1 = require("zod");
 const leadService = __importStar(require("../services/leadService"));
+const emailService_1 = require("../services/emailService");
 const leadSchema = zod_1.z.object({
     name: zod_1.z.string().min(2, "Name must be at least 2 characters"),
     email: zod_1.z.string().email("Invalid email address"),
@@ -48,6 +49,8 @@ const submitLead = async (req, res, next) => {
     try {
         const validatedData = leadSchema.parse(req.body);
         const lead = await leadService.createLead(validatedData);
+        // Send email notification (don't await to keep response fast)
+        (0, emailService_1.sendLeadNotification)(lead);
         res.status(201).json({
             success: true,
             message: "Lead captured successfully",
