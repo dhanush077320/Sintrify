@@ -42,7 +42,7 @@ export default function Hero({ onExplore, onStartProject }: HeroProps) {
                   </div>
                 )}
               </div>
-              <button className="btn-outline" onClick={onExplore}>Explore</button>
+              <button className="btn-filled" onClick={onExplore}>Explore</button>
             </div>
             
             <button className={`${styles.startProjectBtn} btn-filled`} onClick={onStartProject}>
