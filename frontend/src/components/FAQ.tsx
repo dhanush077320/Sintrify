@@ -25,6 +25,10 @@ const FAQ_DATA = [
   {
     question: "What kind of video production and photography do you offer?",
     answer: "At Sintrify, we offer a personalized 'Digital Photographer' experience. We use a combination of professional cameras and high-end iPhones to help you capture your vision. We specialize in creating high-quality reels, short-form videos, and professional photoshoots for individuals and brands. Think of us as your personal production team that handles everything from the 'First Logic' of the shoot to the 'Final Frame' of the edit."
+  },
+  {
+    question: "Is your production service available everywhere?",
+    answer: "Since we are currently in our launch phase, our on-site video and photo production services are exclusively available in Trivandrum. This allows us to provide a dedicated, local service as we grow. However, our software and design services remain available to clients everywhere!"
   }
 ];
 
