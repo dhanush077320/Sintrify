@@ -68,11 +68,11 @@ export default function Hero({ onExplore, onStartProject }: HeroProps) {
 
           <div className={styles.stats}>
             <div className={styles.statItem}>
-              <span className={styles.count}><CountUp end={stats.happyClients} duration={1200} />+</span>
+              <span className={styles.count}><CountUp end={stats.happyClients} duration={800} />+</span>
               <span className={styles.label}>Happy Clients</span>
             </div>
             <div className={styles.statItem}>
-              <span className={styles.count}><CountUp end={stats.projectsDelivered} duration={1200} />+</span>
+              <span className={styles.count}><CountUp end={stats.projectsDelivered} duration={800} />+</span>
               <span className={styles.label}>Projects Delivered</span>
             </div>
           </div>
