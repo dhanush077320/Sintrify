@@ -29,7 +29,7 @@ export default function Footer({ onPrivacy, onTerms, onExplore, onFAQ }: FooterP
               <a href="#" onClick={(e) => { e.preventDefault(); onExplore?.(); }}>Portfolio</a>
               <a href="#services">Services</a>
               <a href="#process">Process</a>
-              <a href="#" onClick={(e) => { e.preventDefault(); onFAQ?.(); }}>Intelligence</a>
+              <a href="#about">About Us</a>
             </div>
             <div className={styles.col}>
               <h4>CONNECT</h4>
