@@ -18,7 +18,7 @@ const SERVICES = [
   },
   { 
     id: "mobile", 
-    label: "Native App", 
+    label: "App", 
     base: 3500, 
     icon: (props: any) => (
       <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
