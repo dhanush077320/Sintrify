@@ -225,7 +225,7 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
                   <div className={styles.pulseRing} />
                 </div>
                 <h3>Consultation Initialized</h3>
-                <p>Your strategic roadmap is being prepared. Our architectural team will contact you at <strong>{formData.email}</strong> within 12 hours.</p>
+                <p>Your strategic roadmap is being prepared. Our architectural team will contact you within 12 hours.</p>
                 <button className="btn-filled" onClick={() => { setStep(1); setSelected([]); }}>New Estimate</button>
               </div>
             )}
