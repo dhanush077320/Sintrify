@@ -33,15 +33,16 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchLeads = exports.submitLead = void 0;
+exports.removeLead = exports.fetchLeads = exports.submitLead = void 0;
 const zod_1 = require("zod");
 const leadService = __importStar(require("../services/leadService"));
 const leadSchema = zod_1.z.object({
     name: zod_1.z.string().min(2, "Name must be at least 2 characters"),
     email: zod_1.z.string().email("Invalid email address"),
+    phone: zod_1.z.string().min(10, "Phone number must be at least 10 digits"),
     services: zod_1.z.array(zod_1.z.string()).min(1, "Select at least one service"),
-    message: zod_1.z.string().optional(),
-    estimate: zod_1.z.number().positive(),
+    message: zod_1.z.string().min(5, "Objectives must be at least 5 characters"),
+    estimate: zod_1.z.number().nonnegative(),
 });
 const submitLead = async (req, res, next) => {
     try {
@@ -68,3 +69,13 @@ const fetchLeads = async (req, res, next) => {
     }
 };
 exports.fetchLeads = fetchLeads;
+const removeLead = async (req, res, next) => {
+    try {
+        await leadService.deleteLead(req.params.id);
+        res.json({ success: true, message: "Lead record deleted" });
+    }
+    catch (error) {
+        next(error);
+    }
+};
+exports.removeLead = removeLead;

@@ -38,4 +38,5 @@ const leadController = __importStar(require("../controllers/leadController"));
 const router = (0, express_1.Router)();
 router.post("/", leadController.submitLead);
 router.get("/", leadController.fetchLeads);
+router.delete("/:id", leadController.removeLead);
 exports.default = router;

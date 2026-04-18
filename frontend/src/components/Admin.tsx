@@ -159,7 +159,12 @@ export default function Admin({ onLogout }: AdminProps) {
                     <p>{lead.message}</p>
                   </div>
                   <div className={styles.leadActions}>
-                    <button onClick={() => window.open(`mailto:${lead.email}`)} className="btn-outline">Email</button>
+                    <button 
+                      onClick={() => window.open(`https://wa.me/${lead.phone.replace(/[^0-9]/g, '')}`)} 
+                      className="btn-outline"
+                    >
+                      WhatsApp
+                    </button>
                     <button onClick={() => window.open(`tel:${lead.phone}`)} className="btn-outline">Call</button>
                     <button onClick={() => handleDeleteLead(lead._id)} className={styles.deleteLink}>Delete</button>
                   </div>

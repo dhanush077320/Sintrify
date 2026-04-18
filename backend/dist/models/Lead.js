@@ -37,8 +37,9 @@ const mongoose_1 = __importStar(require("mongoose"));
 const LeadSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true },
+    phone: { type: String, required: true },
     services: { type: [String], required: true },
-    message: { type: String },
+    message: { type: String, required: true },
     estimate: { type: Number, required: true },
     status: { type: String, default: "new" },
     createdAt: { type: Date, default: Date.now },
