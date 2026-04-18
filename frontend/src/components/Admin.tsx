@@ -301,7 +301,7 @@ export default function Admin({ onLogout }: AdminProps) {
                   <textarea 
                     value={editingProject ? editCaption : caption} 
                     onChange={(e) => editingProject ? setEditCaption(e.target.value) : setCaption(e.target.value)} 
-                    placeholder="Enter project description OR paste a website link (e.g. https://google.com)"
+                    placeholder="Enter description AND/OR paste a website link (e.g. My Project https://sintrify.com)"
                   />
                 </div>
                 {!editingProject && (

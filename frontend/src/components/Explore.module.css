@@ -104,8 +104,19 @@
   text-decoration: none;
   font-weight: 700;
   display: inline-block;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   transition: all 0.3s ease;
+}
+
+.captionWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.captionText {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
 }
 
 .projectLink:hover {

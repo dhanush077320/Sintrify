@@ -120,7 +120,7 @@ export default function Pathway() {
           </div>
         </div>
 
-        {/* About Section (Fedgix Style) */}
+        {/* About Section  */}
         <div id="about" className={styles.about}>
           <div className={styles.aboutContent}>
             <h3>About Sintrify</h3>
