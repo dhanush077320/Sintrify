@@ -4,10 +4,9 @@ interface FooterProps {
   onPrivacy?: () => void;
   onTerms?: () => void;
   onExplore?: () => void;
-  onFAQ?: () => void;
 }
 
-export default function Footer({ onPrivacy, onTerms, onExplore, onFAQ }: FooterProps) {
+export default function Footer({ onPrivacy, onTerms, onExplore }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
