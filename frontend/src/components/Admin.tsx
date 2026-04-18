@@ -117,36 +117,36 @@ export default function Admin({ onLogout }: AdminProps) {
       setIsUploading(false);
     }
   };
-+
-+  const startEditing = (project: Project) => {
-+    setEditingProject(project);
-+    setEditTitle(project.title);
-+    setEditCaption(project.caption);
-+    window.scrollTo({ top: 0, behavior: 'smooth' });
-+  };
-+
-+  const handleUpdateProject = async (e: React.FormEvent) => {
-+    e.preventDefault();
-+    if (!editingProject) return;
-+
-+    setIsUploading(true);
-+    try {
-+      await axios.put(`${API_ENDPOINTS.PROJECTS}/${editingProject._id}`, {
-+        title: editTitle,
-+        caption: editCaption
-+      });
-+      setEditingProject(null);
-+      setEditTitle("");
-+      setEditCaption("");
-+      fetchProjects();
-+      alert("Project updated successfully!");
-+    } catch (error) {
-+      console.error("Error updating project:", error);
-+      alert("Failed to update project.");
-+    } finally {
-+      setIsUploading(false);
-+    }
-+  };
+
+  const startEditing = (project: Project) => {
+    setEditingProject(project);
+    setEditTitle(project.title);
+    setEditCaption(project.caption);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleUpdateProject = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingProject) return;
+
+    setIsUploading(true);
+    try {
+      await axios.put(`${API_ENDPOINTS.PROJECTS}/${editingProject._id}`, {
+        title: editTitle,
+        caption: editCaption
+      });
+      setEditingProject(null);
+      setEditTitle("");
+      setEditCaption("");
+      fetchProjects();
+      alert("Project updated successfully!");
+    } catch (error) {
+      console.error("Error updating project:", error);
+      alert("Failed to update project.");
+    } finally {
+      setIsUploading(false);
+    }
+  };
 
   const handleDeleteProject = async (id: string) => {
     if (!window.confirm("Are you sure you want to delete this project?")) return;
