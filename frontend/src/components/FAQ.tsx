@@ -3,21 +3,28 @@ import styles from "./FAQ.module.css";
 
 const FAQ_DATA = [
   {
-    question: "What is Sintrify's modular architectural approach?",
-    answer: "We engineer elite digital products using a strategy-first MERN architecture. Every module is built for synchronous scale, utilizing high-performance data patterns and cinematic interface logic to ensure your brand commands authority from day one."
+    question: "What is Sintrify?",
+    answer: "Sintrify is a digital powerhouse that provides a unified solution for businesses. We combine expert software development (Web & App) with professional media production (Video, Photo, & Design) to build a complete digital ecosystem for our clients."
   },
   {
-    id: "02",
-    question: "How do you bridge high-end production with technical engineering?",
-    answer: "Our team operates at the intersection of code and creativity. We treat every line of React as a structural asset and every frame of cinematic video as a narrative tool, ensuring technical performance and emotional impact are never traded off."
+    question: "Why should I choose Sintrify over hiring multiple freelancers?",
+    answer: "Hiring multiple freelancers often leads to fragmented branding and communication gaps. Sintrify acts as a single partner where your code, design, and media are developed under one roof, ensuring perfect synchronization and a consistent brand voice."
   },
   {
-    question: "What is the typical deployment timeline for an elite ecosystem?",
-    answer: "An elite architectural MVP typically transitions from blueprint to deployment within 4 to 8 weeks. Complex enterprise ecosystems with deep integrations follow a meticulous 12+ week deployment framework."
+    question: "Do you provide UI/UX design services?",
+    answer: "Yes. Every software project starts with a comprehensive UI/UX phase to ensure the final product is not only functional but also intuitive and visually stunning."
   },
   {
-    question: "How does the 'Nedumangad to Global' strategy benefit my brand?",
-    answer: "We leverage local technical agility and global cinematic standards. This ensures your project is cost-optimized for development while maintaining the premium quality required to compete in high-stakes global markets."
+    question: "Can you help with existing projects, or do you only start from scratch?",
+    answer: "We do both! We can build a 'from-zero' MVP for your startup or provide specialized 'Digital Force' to scale and optimize your existing platforms."
+  },
+  {
+    question: "How do we get started with a project?",
+    answer: "Simply click the 'Get Started' button on our posters or website. We’ll schedule a discovery call to understand your 'First Logic' and map out the path to your 'Final Frame.'"
+  },
+  {
+    question: "What kind of video production and photography do you offer?",
+    answer: "At Sintrify, we offer a personalized 'Digital Photographer' experience. We use a combination of professional cameras and high-end iPhones to help you capture your vision. We specialize in creating high-quality reels, short-form videos, and professional photoshoots for individuals and brands. Think of us as your personal production team that handles everything from the 'First Logic' of the shoot to the 'Final Frame' of the edit."
   }
 ];
 
