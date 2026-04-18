@@ -131,7 +131,6 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
                     </div>
                     <div className={styles.serviceInfo}>
                       <h4>{s.label}</h4>
-                      <p>starting from ${s.base.toLocaleString()}</p>
                     </div>
                     <div className={styles.checkbox}>
                       {selected.includes(s.id) && <div className={styles.checkInner} />}
@@ -187,8 +186,7 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
           {step < 3 && (
             <div className={styles.footer}>
               <div className={styles.pricing}>
-                <span className={styles.priceLabel}>Estimated Architecture Value</span>
-                <span className={styles.priceValue}>${total.toLocaleString()}*</span>
+                {/* Price labels removed as requested */}
               </div>
               <div className={styles.actions}>
                 {step === 2 && (
