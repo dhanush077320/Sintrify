@@ -376,11 +376,7 @@
     letter-spacing: -1.5px;
   }
   .visualSide {
-    height: 480px;
-    margin-bottom: 2rem;
-    transform: scale(0.75);
-    transform-origin: top center;
-    width: 100%;
+    display: none;
   }
   .node {
     left: 13.3% !important;
