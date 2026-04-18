@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -17,6 +17,10 @@ import "./index.css";
 
 function App() {
   const [view, setView] = useState<"landing" | "login" | "admin" | "explore" | "faq" | "privacy" | "terms" | "startproject">("landing");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
 
   const scrollToSection = (id: string) => {
     if (view !== "landing") {
