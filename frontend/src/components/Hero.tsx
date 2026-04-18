@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "./Hero.module.css";
+import { API_ENDPOINTS } from "../config";
 
 interface HeroProps {
   onExplore?: () => void;
@@ -8,6 +10,19 @@ interface HeroProps {
 
 export default function Hero({ onExplore, onStartProject }: HeroProps) {
   const [showContacts, setShowContacts] = useState(false);
+  const [stats, setStats] = useState({ happyClients: 35, projectsDelivered: 36 });
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await axios.get(API_ENDPOINTS.STATS);
+        setStats(res.data);
+      } catch (error) {
+        console.error("Error fetching live stats:", error);
+      }
+    };
+    fetchStats();
+  }, []);
 
   return (
     <section className={styles.hero}>
@@ -52,11 +67,11 @@ export default function Hero({ onExplore, onStartProject }: HeroProps) {
 
           <div className={styles.stats}>
             <div className={styles.statItem}>
-              <span className={styles.count}>35+</span>
+              <span className={styles.count}>{stats.happyClients}+</span>
               <span className={styles.label}>Happy Clients</span>
             </div>
             <div className={styles.statItem}>
-              <span className={styles.count}>36+</span>
+              <span className={styles.count}>{stats.projectsDelivered}+</span>
               <span className={styles.label}>Projects Delivered</span>
             </div>
           </div>

@@ -28,18 +28,47 @@ interface AdminProps {
 
 
 export default function Admin({ onLogout }: AdminProps) {
-  const [activeTab, setActiveTab] = useState<"projects" | "leads">("leads");
+  const [activeTab, setActiveTab] = useState<"projects" | "leads" | "stats">("leads");
   const [projects, setProjects] = useState<Project[]>([]);
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [stats, setStats] = useState({ happyClients: 0, projectsDelivered: 0 });
   const [title, setTitle] = useState("");
   const [caption, setCaption] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isSavingStats, setIsSavingStats] = useState(false);
 
   useEffect(() => {
     fetchProjects();
     fetchLeads();
+    fetchStats();
   }, []);
+
+  const fetchStats = async () => {
+    try {
+      const res = await axios.get(API_ENDPOINTS.STATS);
+      setStats({
+        happyClients: res.data.happyClients,
+        projectsDelivered: res.data.projectsDelivered
+      });
+    } catch (error) {
+      console.error("Error fetching stats:", error);
+    }
+  };
+
+  const handleUpdateStats = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSavingStats(true);
+    try {
+      await axios.put(API_ENDPOINTS.STATS, stats);
+      alert("Site statistics updated successfully!");
+    } catch (error) {
+      console.error("Error updating stats:", error);
+      alert("Failed to update statistics.");
+    } finally {
+      setIsSavingStats(false);
+    }
+  };
 
   const fetchLeads = async () => {
     try {
@@ -131,6 +160,12 @@ export default function Admin({ onLogout }: AdminProps) {
           >
             Portfolio Projects
           </button>
+          <button 
+            className={`${styles.tabBtn} ${activeTab === 'stats' ? styles.activeTab : ""}`}
+            onClick={() => setActiveTab('stats')}
+          >
+            Site Settings
+          </button>
         </div>
 
         {activeTab === 'leads' ? (
@@ -171,6 +206,41 @@ export default function Admin({ onLogout }: AdminProps) {
                 </div>
               ))}
               {leads.length === 0 && <p className={styles.emptyMsg}>No appointments booked yet.</p>}
+            </div>
+          </section>
+        ) : activeTab === 'stats' ? (
+
+          <section className={styles.statsSection}>
+            <header className={styles.header}>
+              <h1>Site <span className="text-gradient">Settings</span></h1>
+              <p>Update live metrics and global site counters.</p>
+            </header>
+
+            <div className={`${styles.statsCard} glass`}>
+              <h2>Counter Management</h2>
+              <form onSubmit={handleUpdateStats} className={styles.statsForm}>
+                <div className={styles.inputGroup}>
+                  <label>Happy Clients Counter</label>
+                  <input 
+                    type="number" 
+                    value={stats.happyClients} 
+                    onChange={(e) => setStats({ ...stats, happyClients: parseInt(e.target.value) })}
+                  />
+                  <small>Displays as {stats.happyClients}+ on the home page</small>
+                </div>
+                <div className={styles.inputGroup}>
+                  <label>Projects Delivered Counter</label>
+                  <input 
+                    type="number" 
+                    value={stats.projectsDelivered} 
+                    onChange={(e) => setStats({ ...stats, projectsDelivered: parseInt(e.target.value) })}
+                  />
+                  <small>Displays as {stats.projectsDelivered}+ on the home page</small>
+                </div>
+                <button type="submit" className="btn-filled" disabled={isSavingStats}>
+                  {isSavingStats ? "Saving..." : "Update Website Counters"}
+                </button>
+              </form>
             </div>
           </section>
         ) : (

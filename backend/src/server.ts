@@ -6,6 +6,7 @@ import morgan from "morgan";
 import connectDB from "./config/db";
 import leadRoutes from "./routes/leadRoutes";
 import projectRoutes from "./routes/projectRoutes";
+import statsRoutes from "./routes/statsRoutes";
 import { errorHandler } from "./middleware/errorHandler";
 import path from "path";
 
@@ -26,6 +27,7 @@ app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 // Routes
 app.use("/api/leads", leadRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/stats", statsRoutes);
 
 // Global Error Handler
 app.use(errorHandler);
