@@ -132,7 +132,7 @@ export default function Pathway() {
                 Based in <strong>Nedumangad, Trivandrum</strong>, our mission is to uncover your business's pain points and deliver strategic, tailor-made digital solutions. Whether it's increasing your online visibility or streamlining operations, we help you take the right step forward.
               </p>
               <p>
-                With over <strong>35+ successful client partnerships</strong> and an expert team behind every project, we turn challenges into results. From initial planning to post-launch support — we stay connected and committed.
+                With an expert team behind every project, we turn challenges into results. From initial planning to post-launch support — we stay connected and committed.
               </p>
               <p>
                 Let <strong>Sintrify</strong> be the force that drives your digital success.
