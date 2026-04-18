@@ -5,19 +5,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendLeadNotification = void 0;
 const nodemailer_1 = __importDefault(require("nodemailer"));
-const transporter = nodemailer_1.default.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
-});
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+const createTransporter = () => {
+    return nodemailer_1.default.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+        },
+    });
+};
 const sendLeadNotification = async (lead) => {
     console.log("Attempting to send notification for lead:", lead.name);
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
         console.error("❌ EMAIL ERROR: Credentials missing in .env or Render Environment Variables.");
         return;
     }
+    const transporter = createTransporter();
     const mailOptions = {
         from: `"Sintrify Engine" <${process.env.EMAIL_USER}>`,
         to: process.env.EMAIL_USER,
