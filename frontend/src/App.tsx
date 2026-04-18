@@ -18,6 +18,19 @@ import "./index.css";
 function App() {
   const [view, setView] = useState<"landing" | "login" | "admin" | "explore" | "faq" | "privacy" | "terms" | "startproject">("landing");
 
+  const scrollToSection = (id: string) => {
+    if (view !== "landing") {
+      setView("landing");
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <ThemeProvider>
       <main>
@@ -28,7 +41,7 @@ function App() {
             <Hero onExplore={() => setView("explore")} onStartProject={() => setView("startproject")} />
             <Services />
             <Pathway />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onScrollTo={scrollToSection} />
           </>
         )}
         
@@ -47,7 +60,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onStartProject={() => setView("startproject")} onHome={() => setView("landing")} />
             <Explore onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onScrollTo={scrollToSection} />
           </>
         )}
 
@@ -55,7 +68,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onHome={() => setView("landing")} />
             <FAQ onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onScrollTo={scrollToSection} />
           </>
         )}
 
@@ -63,7 +76,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onHome={() => setView("landing")} />
             <PrivacyPolicy onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onScrollTo={scrollToSection} />
           </>
         )}
 
@@ -71,7 +84,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onHome={() => setView("landing")} />
             <TermsOfService onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onScrollTo={scrollToSection} />
           </>
         )}
 
@@ -79,7 +92,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onStartProject={() => setView("startproject")} onHome={() => setView("landing")} />
             <QuoteCalculator onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onScrollTo={scrollToSection} />
           </>
         )}
       </main>

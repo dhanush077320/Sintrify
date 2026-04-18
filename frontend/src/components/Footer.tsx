@@ -4,9 +4,10 @@ interface FooterProps {
   onPrivacy?: () => void;
   onTerms?: () => void;
   onExplore?: () => void;
+  onScrollTo?: (id: string) => void;
 }
 
-export default function Footer({ onPrivacy, onTerms, onExplore }: FooterProps) {
+export default function Footer({ onPrivacy, onTerms, onExplore, onScrollTo }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -26,9 +27,9 @@ export default function Footer({ onPrivacy, onTerms, onExplore }: FooterProps) {
             <div className={styles.col}>
               <h4>PLATFORM</h4>
               <a href="#" onClick={(e) => { e.preventDefault(); onExplore?.(); }}>Portfolio</a>
-              <a href="#services">Services</a>
-              <a href="#process">Process</a>
-              <a href="#about">About Us</a>
+              <a href="#services" onClick={(e) => { e.preventDefault(); onScrollTo?.("services"); }}>Services</a>
+              <a href="#process" onClick={(e) => { e.preventDefault(); onScrollTo?.("process"); }}>Process</a>
+              <a href="#about" onClick={(e) => { e.preventDefault(); onScrollTo?.("about"); }}>About Us</a>
             </div>
             <div className={styles.col}>
               <h4>CONNECT</h4>

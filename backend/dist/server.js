@@ -11,6 +11,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const db_1 = __importDefault(require("./config/db"));
 const leadRoutes_1 = __importDefault(require("./routes/leadRoutes"));
 const projectRoutes_1 = __importDefault(require("./routes/projectRoutes"));
+const statsRoutes_1 = __importDefault(require("./routes/statsRoutes"));
 const errorHandler_1 = require("./middleware/errorHandler");
 const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
@@ -26,6 +27,7 @@ app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "../
 // Routes
 app.use("/api/leads", leadRoutes_1.default);
 app.use("/api/projects", projectRoutes_1.default);
+app.use("/api/stats", statsRoutes_1.default);
 // Global Error Handler
 app.use(errorHandler_1.errorHandler);
 app.listen(PORT, () => {
