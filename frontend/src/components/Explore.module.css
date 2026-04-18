@@ -99,6 +99,20 @@
   line-height: 1.6;
 }
 
+.projectLink {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  display: inline-block;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.projectLink:hover {
+  transform: translateX(5px);
+  filter: brightness(1.2);
+}
+
 .loading, .empty {
   text-align: center;
   padding: 10rem 0;

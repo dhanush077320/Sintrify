@@ -66,7 +66,17 @@ export default function Explore({ onBack }: ExploreProps) {
               </div>
               <div className={styles.info}>
                 <h3>{project.title}</h3>
-                {project.caption && <p>{project.caption}</p>}
+                {project.caption && (
+                  <p className={styles.caption}>
+                    {project.caption.startsWith("http") ? (
+                      <a href={project.caption} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+                        View Live Website →
+                      </a>
+                    ) : (
+                      project.caption
+                    )}
+                  </p>
+                )}
               </div>
             </div>
           ))}

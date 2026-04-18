@@ -268,7 +268,7 @@ export default function Admin({ onLogout }: AdminProps) {
                   <textarea 
                     value={caption} 
                     onChange={(e) => setCaption(e.target.value)} 
-                    placeholder="Enter project description/caption (Optional)"
+                    placeholder="Enter project description OR paste a website link (e.g. https://google.com)"
                   />
                 </div>
                 <div className={styles.inputGroup}>
