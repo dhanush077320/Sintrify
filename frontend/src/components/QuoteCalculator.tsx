@@ -42,7 +42,7 @@ const SERVICES = [
   },
   { 
     id: "cinema", 
-    label: "Cinematic Film", 
+    label: "Photo/Video Production", 
     base: 1800, 
     icon: (props: any) => (
       <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
