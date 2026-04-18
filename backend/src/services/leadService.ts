@@ -8,3 +8,7 @@ export const createLead = async (leadData: Partial<ILead>) => {
 export const getAllLeads = async () => {
   return await Lead.find().sort({ createdAt: -1 });
 };
+
+export const deleteLead = async (id: string) => {
+  return await Lead.findByIdAndDelete(id);
+};

@@ -34,3 +34,12 @@ export const fetchLeads = async (req: Request, res: Response, next: NextFunction
     next(error);
   }
 };
+
+export const removeLead = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await leadService.deleteLead(req.params.id);
+    res.json({ success: true, message: "Lead record deleted" });
+  } catch (error) {
+    next(error);
+  }
+};
