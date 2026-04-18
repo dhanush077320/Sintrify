@@ -42,7 +42,7 @@ const leadSchema = zod_1.z.object({
     email: zod_1.z.string().email("Invalid email address"),
     phone: zod_1.z.string().min(10, "Phone number must be at least 10 digits"),
     services: zod_1.z.array(zod_1.z.string()).min(1, "Select at least one service"),
-    message: zod_1.z.string().min(5, "Objectives must be at least 5 characters"),
+    message: zod_1.z.string().min(2, "Objectives must be at least 2 characters"),
     estimate: zod_1.z.number().nonnegative(),
 });
 const submitLead = async (req, res, next) => {

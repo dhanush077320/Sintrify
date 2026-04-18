@@ -1,18 +1,23 @@
 import nodemailer from "nodemailer";
 import { ILead } from "../models/Lead";
+import dotenv from "dotenv";
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
+dotenv.config();
+
+const createTransporter = () => {
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+};
 
 export const sendLeadNotification = async (lead: ILead) => {
   console.log("Attempting to send notification for lead:", lead.name);
   
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+  const transporter = createTransporter();
     console.error("❌ EMAIL ERROR: Credentials missing in .env or Render Environment Variables.");
     return;
   }
