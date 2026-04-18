@@ -8,7 +8,7 @@ const leadSchema = z.object({
   email: z.string().email("Invalid email address"),
   phone: z.string().min(10, "Phone number must be at least 10 digits"),
   services: z.array(z.string()).min(1, "Select at least one service"),
-  message: z.string().min(5, "Objectives must be at least 5 characters"),
+  message: z.string().min(2, "Objectives must be at least 2 characters"),
   estimate: z.number().nonnegative(),
 });
 

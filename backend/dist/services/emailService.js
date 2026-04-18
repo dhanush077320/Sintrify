@@ -13,13 +13,14 @@ const transporter = nodemailer_1.default.createTransport({
     },
 });
 const sendLeadNotification = async (lead) => {
+    console.log("Attempting to send notification for lead:", lead.name);
     if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-        console.warn("Email credentials missing. Notification not sent.");
+        console.error("❌ EMAIL ERROR: Credentials missing in .env or Render Environment Variables.");
         return;
     }
     const mailOptions = {
         from: `"Sintrify Engine" <${process.env.EMAIL_USER}>`,
-        to: process.env.EMAIL_USER, // Send it to yourself
+        to: process.env.EMAIL_USER,
         subject: `🚀 New Lead: ${lead.name}`,
         html: `
       <div style="font-family: sans-serif; max-width: 600px; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
@@ -33,19 +34,15 @@ const sendLeadNotification = async (lead) => {
           <p><strong>Services:</strong> ${lead.services.join(", ")}</p>
           <p><strong>Objectives:</strong> ${lead.message}</p>
         </div>
-        
-        <p style="font-size: 0.9rem; color: #666;">
-          You can view this lead and manage your portfolio in the <a href="https://sintrify.vercel.app/login" style="color: #6366f1;">Admin Panel</a>.
-        </p>
       </div>
     `,
     };
     try {
-        await transporter.sendMail(mailOptions);
-        console.log("Notification email sent to admin");
+        const info = await transporter.sendMail(mailOptions);
+        console.log("✅ EMAIL SUCCESS: Notification sent!", info.response);
     }
     catch (error) {
-        console.error("Error sending lead notification email:", error);
+        console.error("❌ NODEMAILER ERROR:", error);
     }
 };
 exports.sendLeadNotification = sendLeadNotification;
