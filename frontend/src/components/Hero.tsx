@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./Hero.module.css";
 import { API_ENDPOINTS } from "../config";
+import CountUp from "./CountUp";
 
 interface HeroProps {
   onExplore?: () => void;
@@ -67,11 +68,11 @@ export default function Hero({ onExplore, onStartProject }: HeroProps) {
 
           <div className={styles.stats}>
             <div className={styles.statItem}>
-              <span className={styles.count}>{stats.happyClients}+</span>
+              <span className={styles.count}><CountUp end={stats.happyClients} />+</span>
               <span className={styles.label}>Happy Clients</span>
             </div>
             <div className={styles.statItem}>
-              <span className={styles.count}>{stats.projectsDelivered}+</span>
+              <span className={styles.count}><CountUp end={stats.projectsDelivered} />+</span>
               <span className={styles.label}>Projects Delivered</span>
             </div>
           </div>
