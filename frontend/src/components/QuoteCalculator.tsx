@@ -30,7 +30,7 @@ const SERVICES = [
   },
   { 
     id: "branding", 
-    label: "Logo & Mascot", 
+    label: "Logo(2D&3D) & Mascot", 
     base: 1200, 
     icon: (props: any) => (
       <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
