@@ -33,6 +33,7 @@ export default function Footer({ onPrivacy, onTerms, onExplore, onFAQ }: FooterP
             </div>
             <div className={styles.col}>
               <h4>CONNECT</h4>
+              <a href="https://wa.me/917736078898" target="_blank" rel="noopener noreferrer">Direct Inquiry</a>
               <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sintrify123@gmail.com" target="_blank" rel="noopener noreferrer">Email</a>
               <a href="https://www.facebook.com/share/1CngwNgURy/" target="_blank" rel="noopener noreferrer">Facebook</a>
               <a href="https://www.instagram.com/sintrify?igsh=eGlxc3JnemRrczk2" target="_blank" rel="noopener noreferrer">Instagram</a>
