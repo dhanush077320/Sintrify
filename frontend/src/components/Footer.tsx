@@ -41,7 +41,6 @@ export default function Footer({ onPrivacy, onTerms, onExplore, onFAQ }: FooterP
             <div className={styles.col}>
               <h4>LOCATION</h4>
               <p>Based in Thiruvananthapuram, Kerala</p>
-              <p>Operational Globally</p>
             </div>
           </div>
         </div>
