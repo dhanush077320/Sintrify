@@ -64,6 +64,34 @@ const SERVICES = [
         <path d="M14 4L10 20" />
       </svg>
     )
+  },
+  { 
+    id: "editing", 
+    label: "Photo/Video Editing", 
+    base: 1000, 
+    icon: (props: any) => (
+      <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M7 21L10 21" />
+        <path d="M14 21L17 21" />
+        <path d="M12 21L12 18" />
+        <path d="M3 7V14C3 15.1046 3.89543 16 5 16H19C20.1046 16 21 15.1046 21 14V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7Z" />
+        <path d="M9 10L12 7L15 10" />
+      </svg>
+    )
+  },
+  { 
+    id: "grading", 
+    label: "Color Grading", 
+    base: 800, 
+    icon: (props: any) => (
+      <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 2V22" />
+        <path d="M12 12L21 12" />
+        <path d="M12 12L16.5 4.5" />
+        <path d="M12 12L16.5 19.5" />
+      </svg>
+    )
   }
 ];
 
