@@ -25,7 +25,7 @@ function App() {
         {view === "landing" && (
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onStartProject={() => setView("startproject")} />
-            <Hero onExplore={() => setView("explore")} />
+            <Hero onExplore={() => setView("explore")} onStartProject={() => setView("startproject")} />
             <Services />
             <Pathway />
             <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} />
