@@ -376,14 +376,14 @@
     letter-spacing: -1.5px;
   }
   .visualSide {
-    height: 400px;
+    height: 480px;
     margin-bottom: 2rem;
     transform: scale(0.75);
     transform-origin: top center;
     width: 100%;
   }
   .node {
-    left: 10% !important;
+    left: 13.3% !important;
   }
   .nodeIcon {
     width: 48px;

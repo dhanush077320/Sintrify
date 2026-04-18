@@ -58,8 +58,8 @@ export default function Pathway() {
               <svg className={styles.backgroundSvg} viewBox="0 0 600 550">
                 {/* Responsive coordinates: 80 for mobile (scale-adjusted), 130 for desktop */}
                 <path d="M80 175 Q 300 175 300 285" className={`${styles.flowPath} ${activeNodeId === 'analyzing' ? styles.pathActive : ''}`} />
-                <path d="M80 275 H 300" className={`${styles.flowPath} ${activeNodeId === 'strategy' ? styles.pathActive : ''}`} style={{ transform: 'translateY(10px)' }} />
-                <path d="M80 375 Q 300 375 300 285" className={`${styles.flowPath} ${activeNodeId === 'service' ? styles.pathActive : ''}`} />
+                <path d="M80 285 H 300" className={`${styles.flowPath} ${activeNodeId === 'strategy' ? styles.pathActive : ''}`} />
+                <path d="M80 395 Q 300 395 300 285" className={`${styles.flowPath} ${activeNodeId === 'service' ? styles.pathActive : ''}`} />
                 
                 {/* Center to Right connection */}
                 <path d="M300 285 H 550" className={styles.flowPath} />
@@ -71,7 +71,7 @@ export default function Pathway() {
                    <div 
                     key={node.id} 
                     className={`${styles.node} ${activeNodeId === node.id ? styles.active : ""}`}
-                    style={{ "--node-top": `${175 + i * 100}px` } as any}
+                    style={{ "--node-top": `${175 + i * 110}px` } as any}
                     onMouseEnter={() => setActiveNodeId(node.id)}
                    >
                      <div className={styles.nodeIcon}><node.icon /></div>
