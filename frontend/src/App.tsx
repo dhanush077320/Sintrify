@@ -28,7 +28,7 @@ function App() {
             <Hero onExplore={() => setView("explore")} onStartProject={() => setView("startproject")} />
             <Services />
             <Pathway />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} />
           </>
         )}
         
@@ -47,7 +47,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onStartProject={() => setView("startproject")} onHome={() => setView("landing")} />
             <Explore onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} />
           </>
         )}
 
@@ -55,7 +55,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onHome={() => setView("landing")} />
             <FAQ onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} />
           </>
         )}
 
@@ -63,7 +63,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onHome={() => setView("landing")} />
             <PrivacyPolicy onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} />
           </>
         )}
 
@@ -71,7 +71,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onHome={() => setView("landing")} />
             <TermsOfService onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} />
           </>
         )}
 
@@ -79,7 +79,7 @@ function App() {
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onStartProject={() => setView("startproject")} onHome={() => setView("landing")} />
             <QuoteCalculator onBack={() => setView("landing")} />
-            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} />
+            <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} />
           </>
         )}
       </main>

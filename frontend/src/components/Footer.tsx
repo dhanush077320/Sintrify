@@ -3,9 +3,11 @@ import styles from "./Footer.module.css";
 interface FooterProps {
   onPrivacy?: () => void;
   onTerms?: () => void;
+  onExplore?: () => void;
+  onFAQ?: () => void;
 }
 
-export default function Footer({ onPrivacy, onTerms }: FooterProps) {
+export default function Footer({ onPrivacy, onTerms, onExplore, onFAQ }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -24,10 +26,10 @@ export default function Footer({ onPrivacy, onTerms }: FooterProps) {
           <div className={styles.linksRow}>
             <div className={styles.col}>
               <h4>PLATFORM</h4>
-              <a href="#portfolio">Portfolio</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); onExplore?.(); }}>Portfolio</a>
               <a href="#services">Services</a>
               <a href="#process">Process</a>
-              <a href="#faq">Intelligence</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); onFAQ?.(); }}>Intelligence</a>
             </div>
             <div className={styles.col}>
               <h4>CONNECT</h4>
