@@ -55,6 +55,7 @@ export const updateProject = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { title, caption } = req.body;
+    const file = req.file;
 
     const project = await Project.findById(id);
     if (!project) {
@@ -63,6 +64,11 @@ export const updateProject = async (req: Request, res: Response) => {
 
     project.title = title || project.title;
     project.caption = caption || project.caption;
+    
+    if (file) {
+      project.fileUrl = (file as any).path;
+      project.fileType = file.mimetype;
+    }
     
     await project.save();
     res.status(200).json(project);

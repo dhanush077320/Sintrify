@@ -130,14 +130,21 @@ export default function Admin({ onLogout }: AdminProps) {
     if (!editingProject) return;
 
     setIsUploading(true);
+    const formData = new FormData();
+    formData.append("title", editTitle);
+    formData.append("caption", editCaption);
+    if (file) {
+      formData.append("file", file);
+    }
+
     try {
-      await axios.put(`${API_ENDPOINTS.PROJECTS}/${editingProject._id}`, {
-        title: editTitle,
-        caption: editCaption
+      await axios.put(`${API_ENDPOINTS.PROJECTS}/${editingProject._id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" }
       });
       setEditingProject(null);
       setEditTitle("");
       setEditCaption("");
+      setFile(null);
       fetchProjects();
       alert("Project updated successfully!");
     } catch (error) {
@@ -304,16 +311,14 @@ export default function Admin({ onLogout }: AdminProps) {
                     placeholder="Enter description AND/OR paste a website link (e.g. My Project https://sintrify.com)"
                   />
                 </div>
-                {!editingProject && (
-                  <div className={styles.inputGroup}>
-                    <label>File (Image or Document)</label>
-                    <input 
-                      type="file" 
-                      onChange={(e) => setFile(e.target.files?.[0] || null)} 
-                      required
-                    />
-                  </div>
-                )}
+                <div className={styles.inputGroup}>
+                  <label>File (Image or Document) {editingProject && <span className={styles.optionalHint}>(Optional - leave empty to keep current file)</span>}</label>
+                  <input 
+                    type="file" 
+                    onChange={(e) => setFile(e.target.files?.[0] || null)} 
+                    required={!editingProject}
+                  />
+                </div>
                 <div className={styles.formActions}>
                   <button type="submit" className="btn-filled" disabled={isUploading}>
                     {isUploading ? "Processing..." : (editingProject ? "Save Changes" : "Upload Project")}

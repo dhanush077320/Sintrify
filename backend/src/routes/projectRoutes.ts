@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/", cloudUpload.single("file"), uploadProject);
 router.get("/", getProjects);
-router.put("/:id", updateProject);
+router.put("/:id", cloudUpload.single("file"), updateProject);
 router.delete("/:id", deleteProject);
 
 export default router;

@@ -219,6 +219,14 @@
   letter-spacing: 0.05em;
 }
 
+.optionalHint {
+  text-transform: none;
+  font-weight: 400;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-left: 0.5rem;
+}
+
 .inputGroup input, .inputGroup textarea {
   padding: 1.2rem;
   border-radius: 12px;
