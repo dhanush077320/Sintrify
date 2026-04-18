@@ -5,9 +5,10 @@ import * as leadService from "../services/leadService";
 const leadSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number must be at least 10 digits"),
   services: z.array(z.string()).min(1, "Select at least one service"),
-  message: z.string().optional(),
-  estimate: z.number().positive(),
+  message: z.string().min(5, "Objectives must be at least 5 characters"),
+  estimate: z.number().nonnegative(),
 });
 
 export const submitLead = async (req: Request, res: Response, next: NextFunction) => {

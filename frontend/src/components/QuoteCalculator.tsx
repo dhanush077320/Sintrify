@@ -103,7 +103,7 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
   const [selected, setSelected] = useState<string[]>([]);
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
 
   const total = selected.reduce((sum, id) => {
     return sum + (SERVICES.find(s => s.id === id)?.base || 0);
@@ -182,7 +182,7 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
             )}
 
             {step === 2 && (
-              <form className={styles.form} onSubmit={handleSubmit}>
+              <form className={styles.form} onSubmit={handleSubmit} id="quoteForm">
                 <div className={styles.inputGroup}>
                   <label>Consultant Name</label>
                   <input 
@@ -198,9 +198,16 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
                   />
                 </div>
                 <div className={styles.inputGroup}>
+                  <label>Phone Number</label>
+                  <input 
+                    type="tel" required placeholder="+91 98765 43210" 
+                    value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})}
+                  />
+                </div>
+                <div className={styles.inputGroup}>
                   <label>Ecosystem Objectives</label>
                   <textarea 
-                    rows={4} placeholder="Describe your primary technical goals..."
+                    rows={4} required placeholder="Describe your primary technical goals..."
                     value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})}
                   />
                 </div>
@@ -238,7 +245,9 @@ export default function QuoteCalculator({ onBack }: QuoteCalculatorProps) {
                 <button 
                   className="btn-filled"
                   disabled={selected.length === 0 || loading}
-                  onClick={() => step === 1 ? setStep(2) : handleSubmit({ preventDefault: () => {} } as any)}
+                  form={step === 2 ? "quoteForm" : undefined}
+                  type={step === 2 ? "submit" : "button"}
+                  onClick={() => step === 1 ? setStep(2) : undefined}
                 >
                   {loading ? "INITIALIZING..." : step === 1 ? "NEXT: STRATEGY" : "BOOK CONSULTATION"}
                 </button>
