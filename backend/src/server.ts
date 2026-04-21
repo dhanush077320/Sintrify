@@ -25,6 +25,10 @@ app.use(morgan("dev")); // Professional request logging
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 // Routes
+app.get("/", (req, res) => {
+  res.send("🚀 Sintrify Professional Backend is Live and Architecting.");
+});
+
 app.use("/api/leads", leadRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/stats", statsRoutes);
