@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { API_ENDPOINTS } from "./config";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -20,6 +22,17 @@ function App() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    // Background ping to wake up the Render backend (Cold Start fix)
+    const wakeUpServer = async () => {
+      try {
+        await axios.get(API_ENDPOINTS.STATS);
+        console.log("🚀 Sintrify Engine: Waking up backend...");
+      } catch (e) {
+        // Silent catch
+      }
+    };
+    wakeUpServer();
   }, [view]);
 
   const scrollToSection = (id: string) => {
