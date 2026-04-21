@@ -34,7 +34,19 @@ export default function Explore({ onBack }: ExploreProps) {
     fetchProjects();
   }, []);
 
-  if (loading) return <div className={styles.loading}>Loading Sintrify Universe...</div>;
+  if (loading) return (
+    <div className={styles.loadingContainer}>
+      <div className={styles.loadingContent}>
+        <div className={styles.loaderLogo}>
+          SINTR<span>IFY</span>
+        </div>
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill}></div>
+        </div>
+        <p>Architecting the Portfolio...</p>
+      </div>
+    </div>
+  );
 
   return (
     <section className={styles.explore} id="explore">
