@@ -35,7 +35,6 @@ export default function HeroScroll() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [isReady, setIsReady] = useState(false);
 
   // Preload images
   useEffect(() => {
@@ -48,14 +47,7 @@ export default function HeroScroll() {
       img.src = `/hero-frames/ezgif-frame-${frameIndex}.png`;
       img.onload = () => {
         loadedCount++;
-        const progress = Math.floor((loadedCount / FRAME_COUNT) * 100);
-        setLoadingProgress(progress);
-        
-        // Smart Load: Show the site after the first 10 frames are ready
-        if (loadedCount >= 10 && !isReady) {
-          setIsReady(true);
-        }
-        
+        setLoadingProgress(Math.floor((loadedCount / FRAME_COUNT) * 100));
         if (loadedCount === FRAME_COUNT) {
           setImages(loadedImages);
         }
@@ -129,7 +121,7 @@ export default function HeroScroll() {
     };
   }, [images]);
 
-    if (!isReady) {
+  if (loadingProgress < 100) {
     return (
       <div className={styles.loader}>
         <div className={styles.loaderContent}>
@@ -147,13 +139,6 @@ export default function HeroScroll() {
     <div className={styles.scrollWrapper} ref={containerRef}>
       <div className={styles.stickyCanvas}>
         <canvas ref={canvasRef} />
-        
-        {/* Background Loading Indicator (Subtle) */}
-        {loadingProgress < 100 && (
-          <div className={styles.backgroundLoading}>
-            OPTIMIZING EXPERIENCE... {loadingProgress}%
-          </div>
-        )}
         
         {/* Features Overlay */}
         <div className={styles.overlay}>
