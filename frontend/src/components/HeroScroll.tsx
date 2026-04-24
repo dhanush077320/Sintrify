@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./HeroScroll.module.css";
 
 const FRAME_COUNT = 240;
