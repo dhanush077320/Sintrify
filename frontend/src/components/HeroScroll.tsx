@@ -1,35 +1,32 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./HeroScroll.module.css";
 
-// Optimization: Use 80 frames (every 3rd frame) to cut loading time by 66% while keeping it smooth
-const TOTAL_FRAMES = 240;
-const SKIP_FACTOR = 3; 
-const ACTIVE_FRAMES = Math.floor(TOTAL_FRAMES / SKIP_FACTOR);
+const FRAME_COUNT = 240;
 
 const FEATURES = [
   {
     title: "Architecting the Unimaginable",
     subtitle: "Your digital architect for scalable web apps and premium engineering.",
     start: 0,
-    end: 20
+    end: 60
   },
   {
     title: "Scalable Web Systems",
     subtitle: "Production-grade MERN architecture designed for global performance.",
-    start: 25,
-    end: 45
+    start: 75,
+    end: 135
   },
   {
     title: "Immersive UI/UX",
     subtitle: "Cinematic interfaces that prioritize conversion, engagement, and authority.",
-    start: 50,
-    end: 70
+    start: 150,
+    end: 210
   },
   {
     title: "Sintrify Ecosystem",
     subtitle: "Where world-class creativity meets disruptive technological innovation.",
-    start: 75,
-    end: 80
+    start: 225,
+    end: 240
   }
 ];
 
@@ -38,39 +35,31 @@ export default function HeroScroll() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [isReady, setIsReady] = useState(false);
 
-  // Preload optimized frame sequence
+  // Preload all 240 frames for ultimate quality
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
-    for (let i = 0; i < ACTIVE_FRAMES; i++) {
+    for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
-      const actualFrameIndex = (i * SKIP_FACTOR) + 1;
-      const frameIndexStr = actualFrameIndex.toString().padStart(3, '0');
-      img.src = `/hero-frames/ezgif-frame-${frameIndexStr}.png`;
+      const frameIndex = i.toString().padStart(3, '0');
+      img.src = `/hero-frames/ezgif-frame-${frameIndex}.png`;
       
       img.onload = () => {
         loadedCount++;
-        const progress = Math.floor((loadedCount / ACTIVE_FRAMES) * 100);
-        setLoadingProgress(progress);
+        setLoadingProgress(Math.floor((loadedCount / FRAME_COUNT) * 100));
         
-        // Show site after first 10 frames are ready
-        if (loadedCount >= 10 && !isReady) {
-          setIsReady(true);
-        }
-        
-        if (loadedCount === ACTIVE_FRAMES) {
+        if (loadedCount === FRAME_COUNT) {
           setImages(loadedImages);
         }
       };
-      loadedImages[i] = img;
+      loadedImages[i - 1] = img;
     }
   }, []);
 
   useEffect(() => {
-    if (!isReady || !canvasRef.current) return;
+    if (images.length < FRAME_COUNT || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -111,7 +100,7 @@ export default function HeroScroll() {
       const viewportHeight = window.innerHeight;
       const containerHeight = containerRef.current?.offsetHeight || 0;
       const scrollFraction = Math.min(1, Math.max(0, scrollPos / (containerHeight - viewportHeight)));
-      const frameIndex = Math.min(ACTIVE_FRAMES - 1, Math.floor(scrollFraction * (ACTIVE_FRAMES - 1)));
+      const frameIndex = Math.min(FRAME_COUNT - 1, Math.floor(scrollFraction * (FRAME_COUNT - 1)));
       
       requestAnimationFrame(() => renderFrame(frameIndex));
     };
@@ -124,9 +113,9 @@ export default function HeroScroll() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, [images, isReady]);
+  }, [images]);
 
-  if (!isReady) {
+  if (loadingProgress < 100) {
     return (
       <div className={styles.loader}>
         <div className={styles.loaderContent}>
@@ -144,12 +133,6 @@ export default function HeroScroll() {
     <div className={styles.scrollWrapper} ref={containerRef}>
       <div className={styles.stickyCanvas}>
         <canvas ref={canvasRef} />
-        
-        {loadingProgress < 100 && (
-          <div className={styles.backgroundLoading}>
-            OPTIMIZING EXPERIENCE... {loadingProgress}%
-          </div>
-        )}
         
         <div className={styles.overlay}>
           {FEATURES.map((feature, i) => (
@@ -170,17 +153,17 @@ function FeatureText({ feature }: { feature: typeof FEATURES[0] }) {
       const scrollPos = window.scrollY;
       const viewportHeight = window.innerHeight;
       const containerHeight = (document.querySelector(`.${styles.scrollWrapper}`) as HTMLElement)?.offsetHeight || 0;
-      const progress = (scrollPos / (containerHeight - viewportHeight)) * ACTIVE_FRAMES;
+      const progress = (scrollPos / (containerHeight - viewportHeight)) * FRAME_COUNT;
 
       if (progress >= feature.start && progress <= feature.end) {
-        const fadeInPoint = feature.start + 2;
-        const fadeOutPoint = feature.end - 2;
+        const fadeInPoint = feature.start + 5;
+        const fadeOutPoint = feature.end - 5;
         
         let targetOpacity = 1;
         if (progress < fadeInPoint) {
-          targetOpacity = (progress - feature.start) / 2;
+          targetOpacity = (progress - feature.start) / 5;
         } else if (progress > fadeOutPoint) {
-          targetOpacity = 1 - (progress - fadeOutPoint) / 2;
+          targetOpacity = 1 - (progress - fadeOutPoint) / 5;
         }
 
         setOpacity(Math.max(0, Math.min(1, targetOpacity)));
