@@ -31,7 +31,6 @@ const FEATURES = [
 export default function HeroScroll() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -39,9 +38,6 @@ export default function HeroScroll() {
 
     // Pre-load the video
     video.load();
-    video.oncanplaythrough = () => {
-      setIsLoaded(true);
-    };
 
     const handleScroll = () => {
       if (!video.duration) return;
