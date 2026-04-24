@@ -64,6 +64,14 @@
   text-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
+.textGradient {
+  background: linear-gradient(90deg, var(--primary), #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
 /* Loader Styles */
 .loader {
   width: 100vw;

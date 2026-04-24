@@ -5,25 +5,29 @@ const FRAME_COUNT = 240;
 
 const FEATURES = [
   {
-    title: "Architecting the Unimaginable",
+    title: "Architecting the",
+    highlight: "Unimaginable",
     subtitle: "Your digital architect for scalable web apps and premium engineering.",
     start: 0,
     end: 60
   },
   {
-    title: "Scalable Web Systems",
+    title: "Scalable Web",
+    highlight: "Systems",
     subtitle: "Production-grade MERN architecture designed for global performance.",
     start: 75,
     end: 135
   },
   {
-    title: "Immersive UI/UX",
+    title: "Immersive",
+    highlight: "UI/UX",
     subtitle: "Cinematic interfaces that prioritize conversion, engagement, and authority.",
     start: 150,
     end: 210
   },
   {
-    title: "Sintrify Ecosystem",
+    title: "Sintrify",
+    highlight: "Ecosystem",
     subtitle: "Where world-class creativity meets disruptive technological innovation.",
     start: 225,
     end: 240
@@ -183,7 +187,9 @@ function FeatureText({ feature }: { feature: typeof FEATURES[0] }) {
 
   return (
     <div className={styles.featureItem} style={{ opacity, transform }}>
-      <h2 className={styles.featureTitle}>{feature.title}</h2>
+      <h2 className={styles.featureTitle}>
+        {feature.title} <span className={styles.textGradient}>{feature.highlight}</span>
+      </h2>
       <p className={styles.featureSubtitle}>{feature.subtitle}</p>
     </div>
   );
