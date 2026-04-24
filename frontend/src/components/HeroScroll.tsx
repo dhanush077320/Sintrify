@@ -1,75 +1,156 @@
 import { useEffect, useRef, useState } from "react";
 import styles from "./HeroScroll.module.css";
 
+// Optimization: Use 80 frames (every 3rd frame) to cut loading time by 66% while keeping it smooth
+const TOTAL_FRAMES = 240;
+const SKIP_FACTOR = 3; 
+const ACTIVE_FRAMES = Math.floor(TOTAL_FRAMES / SKIP_FACTOR);
+
 const FEATURES = [
   {
     title: "Architecting the Unimaginable",
     subtitle: "Your digital architect for scalable web apps and premium engineering.",
     start: 0,
-    end: 0.25
+    end: 20
   },
   {
     title: "Scalable Web Systems",
     subtitle: "Production-grade MERN architecture designed for global performance.",
-    start: 0.3,
-    end: 0.5
+    start: 25,
+    end: 45
   },
   {
     title: "Immersive UI/UX",
     subtitle: "Cinematic interfaces that prioritize conversion, engagement, and authority.",
-    start: 0.55,
-    end: 0.75
+    start: 50,
+    end: 70
   },
   {
     title: "Sintrify Ecosystem",
     subtitle: "Where world-class creativity meets disruptive technological innovation.",
-    start: 0.8,
-    end: 1
+    start: 75,
+    end: 80
   }
 ];
 
 export default function HeroScroll() {
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isReady, setIsReady] = useState(false);
+
+  // Preload optimized frame sequence
+  useEffect(() => {
+    const loadedImages: HTMLImageElement[] = [];
+    let loadedCount = 0;
+
+    for (let i = 0; i < ACTIVE_FRAMES; i++) {
+      const img = new Image();
+      const actualFrameIndex = (i * SKIP_FACTOR) + 1;
+      const frameIndexStr = actualFrameIndex.toString().padStart(3, '0');
+      img.src = `/hero-frames/ezgif-frame-${frameIndexStr}.png`;
+      
+      img.onload = () => {
+        loadedCount++;
+        const progress = Math.floor((loadedCount / ACTIVE_FRAMES) * 100);
+        setLoadingProgress(progress);
+        
+        // Show site after first 10 frames are ready
+        if (loadedCount >= 10 && !isReady) {
+          setIsReady(true);
+        }
+        
+        if (loadedCount === ACTIVE_FRAMES) {
+          setImages(loadedImages);
+        }
+      };
+      loadedImages[i] = img;
+    }
+  }, []);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    if (!isReady || !canvasRef.current) return;
 
-    // Pre-load the video
-    video.load();
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    const renderFrame = (index: number) => {
+      const img = images[index];
+      if (!img) return;
+
+      const canvasRatio = canvas.width / canvas.height;
+      const imgRatio = img.width / img.height;
+      let drawWidth, drawHeight, offsetX, offsetY;
+
+      if (canvasRatio > imgRatio) {
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        offsetX = 0;
+        offsetY = (canvas.height - drawHeight) / 2;
+      } else {
+        drawWidth = canvas.height * imgRatio;
+        drawHeight = canvas.height;
+        offsetX = (canvas.width - drawWidth) / 2;
+        offsetY = 0;
+      }
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+    };
+
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      handleScroll();
+    };
 
     const handleScroll = () => {
-      if (!video.duration) return;
-      
       const scrollPos = window.scrollY;
       const viewportHeight = window.innerHeight;
       const containerHeight = containerRef.current?.offsetHeight || 0;
-      
-      // Calculate progress (0 to 1) based on scroll through the wrapper
       const scrollFraction = Math.min(1, Math.max(0, scrollPos / (containerHeight - viewportHeight)));
+      const frameIndex = Math.min(ACTIVE_FRAMES - 1, Math.floor(scrollFraction * (ACTIVE_FRAMES - 1)));
       
-      // Set video time based on scroll
-      video.currentTime = scrollFraction * video.duration;
+      requestAnimationFrame(() => renderFrame(frameIndex));
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [images, isReady]);
+
+  if (!isReady) {
+    return (
+      <div className={styles.loader}>
+        <div className={styles.loaderContent}>
+          <div className={styles.logo}>SINTRIFY</div>
+          <div className={styles.progressBar}>
+            <div className={styles.progressFill} style={{ width: `${loadingProgress}%` }} />
+          </div>
+          <div className={styles.loadingText}>Initializing Digital Ecosystem... {loadingProgress}%</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.scrollWrapper} ref={containerRef}>
       <div className={styles.stickyCanvas}>
-        <video 
-          ref={videoRef}
-          src="/hero video.mp4"
-          muted
-          playsInline
-          preload="auto"
-          className={styles.video}
-        />
+        <canvas ref={canvasRef} />
         
-        {/* Features Overlay */}
+        {loadingProgress < 100 && (
+          <div className={styles.backgroundLoading}>
+            OPTIMIZING EXPERIENCE... {loadingProgress}%
+          </div>
+        )}
+        
         <div className={styles.overlay}>
           {FEATURES.map((feature, i) => (
             <FeatureText key={i} feature={feature} />
@@ -88,19 +169,18 @@ function FeatureText({ feature }: { feature: typeof FEATURES[0] }) {
     const handleScroll = () => {
       const scrollPos = window.scrollY;
       const viewportHeight = window.innerHeight;
-      const totalHeight = (document.documentElement.scrollHeight - viewportHeight);
-      const progress = scrollPos / totalHeight;
+      const containerHeight = (document.querySelector(`.${styles.scrollWrapper}`) as HTMLElement)?.offsetHeight || 0;
+      const progress = (scrollPos / (containerHeight - viewportHeight)) * ACTIVE_FRAMES;
 
       if (progress >= feature.start && progress <= feature.end) {
-        // Fade in and out logic
-        const fadeInPoint = feature.start + 0.05;
-        const fadeOutPoint = feature.end - 0.05;
+        const fadeInPoint = feature.start + 2;
+        const fadeOutPoint = feature.end - 2;
         
         let targetOpacity = 1;
         if (progress < fadeInPoint) {
-          targetOpacity = (progress - feature.start) / 0.05;
+          targetOpacity = (progress - feature.start) / 2;
         } else if (progress > fadeOutPoint) {
-          targetOpacity = 1 - (progress - fadeOutPoint) / 0.05;
+          targetOpacity = 1 - (progress - fadeOutPoint) / 2;
         }
 
         setOpacity(Math.max(0, Math.min(1, targetOpacity)));
@@ -115,10 +195,7 @@ function FeatureText({ feature }: { feature: typeof FEATURES[0] }) {
   }, [feature]);
 
   return (
-    <div 
-      className={styles.featureItem} 
-      style={{ opacity, transform }}
-    >
+    <div className={styles.featureItem} style={{ opacity, transform }}>
       <h2 className={styles.featureTitle}>{feature.title}</h2>
       <p className={styles.featureSubtitle}>{feature.subtitle}</p>
     </div>
