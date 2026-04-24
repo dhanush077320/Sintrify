@@ -44,7 +44,7 @@ export default function HeroScroll() {
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
       const frameIndex = i.toString().padStart(3, '0');
-      img.src = `/src/assets/ezgif-frame-${frameIndex}.png`;
+      img.src = `/hero-frames/ezgif-frame-${frameIndex}.png`;
       img.onload = () => {
         loadedCount++;
         setLoadingProgress(Math.floor((loadedCount / FRAME_COUNT) * 100));
