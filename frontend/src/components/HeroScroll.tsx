@@ -77,16 +77,19 @@ export default function HeroScroll() {
       const imgRatio = img.width / img.height;
       let drawWidth, drawHeight, offsetX, offsetY;
 
+      // Smart Zoom: Increase scale slightly to push watermark out of view
+      const zoomFactor = 1.1; 
+
       if (canvasRatio > imgRatio) {
-        drawWidth = canvas.width;
-        drawHeight = canvas.width / imgRatio;
-        offsetX = 0;
+        drawWidth = canvas.width * zoomFactor;
+        drawHeight = (canvas.width / imgRatio) * zoomFactor;
+        offsetX = (canvas.width - drawWidth) / 2;
         offsetY = (canvas.height - drawHeight) / 2;
       } else {
-        drawWidth = canvas.height * imgRatio;
-        drawHeight = canvas.height;
+        drawWidth = (canvas.height * imgRatio) * zoomFactor;
+        drawHeight = canvas.height * zoomFactor;
         offsetX = (canvas.width - drawWidth) / 2;
-        offsetY = 0;
+        offsetY = (canvas.height - drawHeight) / 2;
       }
 
       context.clearRect(0, 0, canvas.width, canvas.height);
