@@ -1,0 +1,139 @@
+.scrollWrapper {
+  height: 800vh; /* Control the length of the scroll animation */
+  background-color: #000;
+  position: relative;
+}
+
+.stickyCanvas {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stickyCanvas canvas {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: radial-gradient(circle at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 100%);
+}
+
+.featureItem {
+  position: absolute;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 2rem;
+  transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+}
+
+.featureTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.featureSubtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+  font-weight: 500;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* Loader Styles */
+.loader {
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loaderContent {
+  text-align: center;
+  width: 300px;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.2em;
+  margin-bottom: 2rem;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+.progressBar {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary);
+  transition: width 0.3s ease-out;
+}
+
+.loadingText {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  50% { opacity: 0.7; filter: brightness(1.2); }
+}
+
+@media (max-width: 768px) {
+  .scrollWrapper {
+    height: 600vh;
+  }
+
+  .featureTitle {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+  }
+
+  .featureSubtitle {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+  }
+
+  .featureItem {
+    transform: translateY(10%) !important; /* Move text down slightly on mobile to avoid covering key visual centers */
+  }
+}

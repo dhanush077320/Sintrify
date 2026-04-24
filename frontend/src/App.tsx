@@ -3,7 +3,8 @@ import axios from "axios";
 import { API_ENDPOINTS } from "./config";
 import { ThemeProvider } from "./context/ThemeContext";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+import HeroScroll from "./components/HeroScroll";
+import HeroCTA from "./components/HeroCTA";
 import Services from "./components/Services";
 import Explore from "./components/Explore";
 import Pathway from "./components/Pathway";
@@ -55,7 +56,8 @@ function App() {
         {view === "landing" && (
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onStartProject={() => setView("startproject")} />
-            <Hero onExplore={() => setView("explore")} onStartProject={() => setView("startproject")} />
+            <HeroScroll />
+            <HeroCTA onExplore={() => setView("explore")} onStartProject={() => setView("startproject")} />
             <Services />
             <Pathway />
             <Footer onPrivacy={() => setView("privacy")} onTerms={() => setView("terms")} onExplore={() => setView("explore")} onScrollTo={scrollToSection} />
