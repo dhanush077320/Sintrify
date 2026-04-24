@@ -79,13 +79,53 @@
 }
 
 .logo {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  margin-bottom: 3rem;
+  animation: breathing 3s infinite ease-in-out;
+}
+
+.logoBase {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 3.5rem;
   font-weight: 900;
   color: #fff;
-  letter-spacing: 0.2em;
-  margin-bottom: 2rem;
-  animation: pulse 2s infinite ease-in-out;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+}
+
+.logoAccent {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--primary), #8b5cf6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logoDot {
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border-radius: 50%;
+  margin-left: 8px;
+  box-shadow: 0 0 20px var(--primary);
+}
+
+@keyframes breathing {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: scale(1.05);
+    opacity: 1;
+    filter: drop-shadow(0 0 30px rgba(0, 119, 255, 0.3));
+  }
 }
 
 .progressBar {
@@ -111,10 +151,6 @@
   letter-spacing: 0.1em;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; filter: brightness(1); }
-  50% { opacity: 0.7; filter: brightness(1.2); }
-}
 
 @media (max-width: 768px) {
   .scrollWrapper {

@@ -119,7 +119,11 @@ export default function HeroScroll() {
     return (
       <div className={styles.loader}>
         <div className={styles.loaderContent}>
-          <div className={styles.logo}>SINTRIFY</div>
+          <div className={styles.logo}>
+            <span className={styles.logoBase}>SINTR</span>
+            <span className={styles.logoAccent}>IFY</span>
+            <span className={styles.logoDot} />
+          </div>
           <div className={styles.progressBar}>
             <div className={styles.progressFill} style={{ width: `${loadingProgress}%` }} />
           </div>
