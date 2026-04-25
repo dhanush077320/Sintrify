@@ -50,15 +50,6 @@ export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
 
-    // Safety Timeout: Force ready after 45 seconds even if some frames fail
-    const safetyTimeout = setTimeout(() => {
-      if (loadedCount < FRAME_COUNT && !hasNotifiedReady) {
-        console.warn("⚠️ Sintrify Engine: Slow network detected. Forcing entry...");
-        if (onReady) onReady();
-        setHasNotifiedReady(true);
-      }
-    }, 45000);
-
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
       const frameIndex = i.toString().padStart(3, '0');
@@ -78,8 +69,6 @@ export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
       };
       loadedImages[i - 1] = img;
     }
-
-    return () => clearTimeout(safetyTimeout);
   }, []);
 
   useEffect(() => {
