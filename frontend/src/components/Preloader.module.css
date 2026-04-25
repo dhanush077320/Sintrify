@@ -1,7 +1,7 @@
 .wrapper {
   position: fixed;
   inset: 0;
-  background-color: #03000a; /* Deepest Midnight */
+  background-color: #03000a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,6 @@
 
 .logoWrapper {
   position: relative;
-  overflow: hidden;
   padding: 1rem;
 }
 
@@ -34,38 +33,48 @@
   align-items: baseline;
   font-family: var(--font-heading);
   font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 900;
-  letter-spacing: 0.12em;
+  font-weight: 950;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 0;
-  /* Brand Gradient */
-  background: linear-gradient(135deg, #fff 0%, #a5b4fc 50%, var(--primary) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff; /* Fallback */
 }
 
 .letter {
   display: inline-block;
   opacity: 0;
-  transform: translateY(30px) scale(0.9);
+  transform: translateY(30px);
   filter: blur(10px);
-  animation: letterEntrance 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: letterEntrance 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  
+  /* Applying gradient directly to letters for 100% visibility */
+  background: linear-gradient(135deg, #fff 20%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Specific accent for the IFY part to match your brand */
+.letter:nth-child(n+6) {
+  background: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .letter:nth-child(1) { animation-delay: 0.1s; }
-.letter:nth-child(2) { animation-delay: 0.2s; }
-.letter:nth-child(3) { animation-delay: 0.3s; }
-.letter:nth-child(4) { animation-delay: 0.4s; }
-.letter:nth-child(5) { animation-delay: 0.5s; }
-.letter:nth-child(6) { animation-delay: 0.6s; }
-.letter:nth-child(7) { animation-delay: 0.7s; }
-.letter:nth-child(8) { animation-delay: 0.8s; }
+.letter:nth-child(2) { animation-delay: 0.15s; }
+.letter:nth-child(3) { animation-delay: 0.2s; }
+.letter:nth-child(4) { animation-delay: 0.25s; }
+.letter:nth-child(5) { animation-delay: 0.3s; }
+.letter:nth-child(6) { animation-delay: 0.35s; }
+.letter:nth-child(7) { animation-delay: 0.4s; }
+.letter:nth-child(8) { animation-delay: 0.45s; }
 
 @keyframes letterEntrance {
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
     filter: blur(0);
   }
 }
@@ -73,12 +82,12 @@
 .dot {
   width: 12px;
   height: 12px;
-  background: var(--primary);
+  background: #38bdf8;
   border-radius: 50%;
   margin-left: 10px;
-  box-shadow: 0 0 40px var(--primary);
+  box-shadow: 0 0 30px #38bdf8;
   opacity: 0;
-  animation: dotFadeIn 1s 1.2s forwards, dotBreath 3s 2.2s infinite ease-in-out;
+  animation: dotFadeIn 0.5s 0.8s forwards, dotBreath 3s 1.3s infinite ease-in-out;
 }
 
 @keyframes dotFadeIn {
@@ -86,78 +95,57 @@
 }
 
 @keyframes dotBreath {
-  0%, 100% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 20px var(--primary); }
-  50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 50px var(--primary); }
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.4); opacity: 1; }
 }
 
-/* Chrome Shimmer Effect */
+/* Chrome Shimmer */
 .shimmerOverlay {
   position: absolute;
   top: 0;
   left: -100%;
-  width: 50%;
+  width: 100%;
   height: 100%;
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(139, 92, 246, 0.2), /* Subtle Purple Shimmer */
+    rgba(255, 255, 255, 0.05),
     transparent
   );
   transform: skewX(-20deg);
-  animation: shimmerSweep 4s 2s infinite ease-in-out;
+  animation: shimmerSweep 3s 1.5s infinite ease-in-out;
+  pointer-events: none;
 }
 
 @keyframes shimmerSweep {
   to { left: 200%; }
 }
 
-/* Activity Indicator */
-.pulseRing {
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
-  margin-top: 3rem;
-  opacity: 0;
-  animation: pulseLine 2.5s 1.5s infinite ease-in-out;
-}
-
-@keyframes pulseLine {
-  0%, 100% { transform: scaleX(0.5); opacity: 0.1; }
-  50% { transform: scaleX(1.8); opacity: 0.6; }
-}
-
-/* Midnight Aurora Background */
+/* Background Atmosphere */
 .nebula {
   position: absolute;
   inset: 0;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(0, 119, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
-  filter: blur(60px);
-  animation: drift 15s infinite alternate ease-in-out;
+  background: radial-gradient(circle at center, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+  animation: drift 20s infinite alternate ease-in-out;
 }
 
 .stardust {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px);
-  background-size: 80px 80px;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
   opacity: 0.1;
   mask-image: radial-gradient(circle at center, black, transparent);
 }
 
 @keyframes drift {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.5; }
-  100% { transform: scale(1.2) translate(2%, 2%); opacity: 0.8; }
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
 }
 
 @media (max-width: 768px) {
   .mainLogo {
     font-size: 2.5rem;
-    letter-spacing: 0.08em;
-  }
-  .dot {
-    width: 8px;
-    height: 8px;
+    letter-spacing: 0.05em;
   }
 }
