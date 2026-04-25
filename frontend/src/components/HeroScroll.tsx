@@ -34,13 +34,18 @@ const FEATURES = [
   }
 ];
 
-export default function HeroScroll() {
+interface HeroScrollProps {
+  onProgress?: (progress: number) => void;
+  onReady?: () => void;
+}
+
+export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [hasNotifiedReady, setHasNotifiedReady] = useState(false);
 
-  // Preload all 240 frames for ultimate quality
+  // Preload all 240 frames
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
@@ -48,14 +53,18 @@ export default function HeroScroll() {
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
       const frameIndex = i.toString().padStart(3, '0');
-      img.src = `/ezgif-frame-${frameIndex}.png`;
+      img.src = `/hero-frames/ezgif-frame-${frameIndex}.png`;
       
       img.onload = () => {
         loadedCount++;
-        setLoadingProgress(Math.floor((loadedCount / FRAME_COUNT) * 100));
+        const progress = Math.floor((loadedCount / FRAME_COUNT) * 100);
+        
+        if (onProgress) onProgress(progress);
         
         if (loadedCount === FRAME_COUNT) {
           setImages(loadedImages);
+          if (onReady) onReady();
+          setHasNotifiedReady(true);
         }
       };
       loadedImages[i - 1] = img;
@@ -63,7 +72,7 @@ export default function HeroScroll() {
   }, []);
 
   useEffect(() => {
-    if (images.length < FRAME_COUNT || !canvasRef.current) return;
+    if (!hasNotifiedReady || !canvasRef.current) return;
 
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
@@ -77,7 +86,6 @@ export default function HeroScroll() {
       const imgRatio = img.width / img.height;
       let drawWidth, drawHeight, offsetX, offsetY;
 
-      // Smart Zoom: Increase scale slightly to push watermark out of view
       const zoomFactor = 1.15; 
 
       if (canvasRatio > imgRatio) {
@@ -120,21 +128,7 @@ export default function HeroScroll() {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
     };
-  }, [images]);
-
-  if (loadingProgress < 100) {
-    return (
-      <div className={styles.loader}>
-        <div className={styles.loaderContent}>
-          <div className={styles.logo}>
-            <span className={styles.logoBase}>SINTR</span>
-            <span className={styles.logoAccent}>IFY</span>
-            <span className={styles.logoDot} />
-          </div>
-        </div>
-      </div>
-    );
-  }
+  }, [images, hasNotifiedReady]);
 
   return (
     <div className={styles.scrollWrapper} ref={containerRef}>

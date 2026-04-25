@@ -16,10 +16,22 @@ import Admin from "./components/Admin";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import FloatingContact from "./components/FloatingContact";
+import Preloader from "./components/Preloader";
 import "./index.css";
 
 function App() {
   const [view, setView] = useState<"landing" | "login" | "admin" | "explore" | "faq" | "privacy" | "terms" | "startproject">("landing");
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isHeroLoading, setIsHeroLoading] = useState(true);
+
+  // Scroll Lock while loading
+  useEffect(() => {
+    if (isHeroLoading && view === "landing") {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isHeroLoading, view]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -52,11 +64,17 @@ function App() {
   return (
     <ThemeProvider>
       <main>
+        {view === "landing" && (
+          <Preloader progress={loadingProgress} isLoading={isHeroLoading} />
+        )}
         {view !== "login" && view !== "admin" && <FloatingContact />}
         {view === "landing" && (
           <>
             <Navbar onSecretTrigger={() => setView("login")} onExplore={() => setView("explore")} onFAQ={() => setView("faq")} onStartProject={() => setView("startproject")} />
-            <HeroScroll />
+            <HeroScroll 
+              onProgress={setLoadingProgress} 
+              onReady={() => setIsHeroLoading(false)} 
+            />
             <HeroCTA onExplore={() => setView("explore")} onStartProject={() => setView("startproject")} />
             <Services />
             <Pathway />
