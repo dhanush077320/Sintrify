@@ -89,8 +89,8 @@ export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
       const isMobile = canvasRatio < 1; 
 
       if (isMobile) {
-        // Fit to Width + Extra Zoom to hide watermark completely
-        const mobileZoom = 1.1;
+        // Fit to Width + Maximum Zoom to hide watermark completely
+        const mobileZoom = 1.2;
         drawWidth = canvas.width * mobileZoom;
         drawHeight = (canvas.width / imgRatio) * mobileZoom;
         offsetX = (canvas.width - drawWidth) / 2;
