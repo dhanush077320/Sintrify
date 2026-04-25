@@ -86,29 +86,19 @@ export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
       const imgRatio = img.width / img.height;
       let drawWidth, drawHeight, offsetX, offsetY;
 
-      const isMobile = canvasRatio < 1; 
+      // Unified Cinematic Cover for all devices (No black bars)
+      const zoomFactor = 1.15; 
 
-      if (isMobile) {
-        // Fit to Width + Maximum Zoom to hide watermark completely
-        const mobileZoom = 1.2;
-        drawWidth = canvas.width * mobileZoom;
-        drawHeight = (canvas.width / imgRatio) * mobileZoom;
+      if (canvasRatio > imgRatio) {
+        drawWidth = canvas.width * zoomFactor;
+        drawHeight = (canvas.width / imgRatio) * zoomFactor;
         offsetX = (canvas.width - drawWidth) / 2;
         offsetY = (canvas.height - drawHeight) / 2;
       } else {
-        // Cinematic Cover on Desktop
-        const zoomFactor = 1.15; 
-        if (canvasRatio > imgRatio) {
-          drawWidth = canvas.width * zoomFactor;
-          drawHeight = (canvas.width / imgRatio) * zoomFactor;
-          offsetX = (canvas.width - drawWidth) / 2;
-          offsetY = (canvas.height - drawHeight) / 2;
-        } else {
-          drawWidth = (canvas.height * imgRatio) * zoomFactor;
-          drawHeight = canvas.height * zoomFactor;
-          offsetX = (canvas.width - drawWidth) / 2;
-          offsetY = (canvas.height - drawHeight) / 2;
-        }
+        drawWidth = (canvas.height * imgRatio) * zoomFactor;
+        drawHeight = canvas.height * zoomFactor;
+        offsetX = (canvas.width - drawWidth) / 2;
+        offsetY = (canvas.height - drawHeight) / 2;
       }
 
       context.clearRect(0, 0, canvas.width, canvas.height);
