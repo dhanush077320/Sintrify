@@ -97,15 +97,8 @@ export default function HeroScroll() {
     };
 
     const handleResize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      
-      const context = canvas.getContext("2d");
-      if (context) context.scale(dpr, dpr);
-      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
       handleScroll();
     };
 
