@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import styles from "./Preloader.module.css";
 
 interface PreloaderProps {
-  progress: number;
+  progress: number; // Still keeping the prop for timing, but not showing it
   isLoading: boolean;
 }
 
-export default function Preloader({ progress, isLoading }: PreloaderProps) {
+export default function Preloader({ isLoading }: PreloaderProps) {
   const [shouldRender, setShouldRender] = useState(true);
 
   useEffect(() => {
     if (!isLoading) {
-      // Small delay to allow the fade-out animation to play
-      const timer = setTimeout(() => setShouldRender(false), 1000);
+      const timer = setTimeout(() => setShouldRender(false), 1500);
       return () => clearTimeout(timer);
     }
   }, [isLoading]);
@@ -21,39 +20,28 @@ export default function Preloader({ progress, isLoading }: PreloaderProps) {
 
   return (
     <div className={`${styles.wrapper} ${!isLoading ? styles.fadeOut : ""}`}>
-      <div className={styles.content}>
-        <div className={styles.logoContainer}>
-          <div className={styles.logoText}>
-            <span className={styles.white}>SINTR</span>
-            <span className={styles.gradient}>IFY</span>
-            <span className={styles.dot} />
-          </div>
-          {/* Glitch clones for the professional effect */}
-          <div className={`${styles.logoText} ${styles.clone} ${styles.blue}`}>
-            <span>SINTR</span><span>IFY</span>
-          </div>
-          <div className={`${styles.logoText} ${styles.clone} ${styles.purple}`}>
-            <span>SINTR</span><span>IFY</span>
-          </div>
-        </div>
-
-        <div className={styles.progressSection}>
-          <div className={styles.track}>
-            <div 
-              className={styles.fill} 
-              style={{ width: `${progress}%` }} 
-            />
-          </div>
-          <div className={styles.stats}>
-            <span className={styles.status}>INITIALIZING ECOSYSTEM</span>
-            <span className={styles.percentage}>{progress}%</span>
-          </div>
-        </div>
-      </div>
+      {/* Cinematic Background */}
+      <div className={styles.nebula} />
+      <div className={styles.stardust} />
       
-      <div className={styles.backgroundEffects}>
-        <div className={styles.glow} />
-        <div className={styles.grid} />
+      <div className={styles.content}>
+        <div className={styles.logoWrapper}>
+          <h1 className={styles.mainLogo}>
+            <span className={styles.letter}>S</span>
+            <span className={styles.letter}>I</span>
+            <span className={styles.letter}>N</span>
+            <span className={styles.letter}>T</span>
+            <span className={styles.letter}>R</span>
+            <span className={styles.letter}>I</span>
+            <span className={styles.letter}>F</span>
+            <span className={styles.letter}>Y</span>
+            <span className={styles.dot} />
+          </h1>
+          <div className={styles.shimmerOverlay} />
+        </div>
+        
+        {/* Subtle Activity Indicator */}
+        <div className={styles.pulseRing} />
       </div>
     </div>
   );

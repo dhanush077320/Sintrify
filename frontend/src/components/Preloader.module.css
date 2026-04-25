@@ -1,19 +1,17 @@
 .wrapper {
   position: fixed;
   inset: 0;
-  background-color: #020617;
+  background-color: #050505; /* Pure Deep Obsidian */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 9999;
   overflow: hidden;
-  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
-              visibility 0.8s;
+  transition: opacity 1.2s cubic-bezier(0.7, 0, 0.3, 1);
 }
 
 .fadeOut {
   opacity: 0;
-  visibility: hidden;
   pointer-events: none;
 }
 
@@ -23,35 +21,50 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  max-width: 400px;
-  padding: 2rem;
 }
 
-.logoContainer {
+.logoWrapper {
   position: relative;
-  margin-bottom: 4rem;
+  overflow: hidden;
+  padding: 1rem;
 }
 
-.logoText {
+.mainLogo {
   display: flex;
   align-items: baseline;
   font-family: var(--font-heading);
-  font-size: 4rem;
-  font-weight: 950;
-  letter-spacing: -2px;
-  text-transform: uppercase;
-}
-
-.white {
+  font-size: clamp(3rem, 10vw, 6rem);
+  font-weight: 900;
+  letter-spacing: 0.15em;
   color: #fff;
+  text-transform: uppercase;
+  margin: 0;
 }
 
-.gradient {
-  background: linear-gradient(90deg, var(--primary), #8b5cf6);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+  filter: blur(10px);
+  animation: letterEntrance 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Staggered entrance for letters */
+.letter:nth-child(1) { animation-delay: 0.1s; }
+.letter:nth-child(2) { animation-delay: 0.2s; }
+.letter:nth-child(3) { animation-delay: 0.3s; }
+.letter:nth-child(4) { animation-delay: 0.4s; }
+.letter:nth-child(5) { animation-delay: 0.5s; }
+.letter:nth-child(6) { animation-delay: 0.6s; }
+.letter:nth-child(7) { animation-delay: 0.7s; }
+.letter:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes letterEntrance {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
 .dot {
@@ -60,123 +73,82 @@
   background: var(--primary);
   border-radius: 50%;
   margin-left: 10px;
-  box-shadow: 0 0 30px var(--primary);
-  animation: dotPulse 2s infinite ease-in-out;
+  box-shadow: 0 0 40px var(--primary);
+  opacity: 0;
+  animation: dotFadeIn 1s 1.2s forwards, dotBreath 3s 2.2s infinite ease-in-out;
 }
 
-/* Glitch Animation */
-.clone {
+@keyframes dotFadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes dotBreath {
+  0%, 100% { transform: scale(1); opacity: 0.8; box-shadow: 0 0 20px var(--primary); }
+  50% { transform: scale(1.4); opacity: 1; box-shadow: 0 0 40px var(--primary); }
+}
+
+/* Chrome Shimmer Effect */
+.shimmerOverlay {
   position: absolute;
   top: 0;
-  left: 0;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.blue {
-  color: var(--primary);
-  animation: glitchBlue 4s infinite;
-}
-
-.purple {
-  color: #8b5cf6;
-  animation: glitchPurple 4s infinite;
-}
-
-@keyframes dotPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.5); opacity: 0.5; }
-}
-
-@keyframes glitchBlue {
-  0%, 90%, 100% { opacity: 0; transform: translate(0); }
-  92% { opacity: 0.5; transform: translate(-5px, 2px); }
-  94% { opacity: 0.5; transform: translate(5px, -2px); }
-}
-
-@keyframes glitchPurple {
-  0%, 90%, 100% { opacity: 0; transform: translate(0); }
-  92% { opacity: 0.5; transform: translate(5px, -2px); }
-  94% { opacity: 0.5; transform: translate(-5px, 2px); }
-}
-
-/* Progress Bar */
-.progressSection {
-  width: 100%;
-}
-
-.track {
-  width: 100%;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-
-.fill {
+  left: -100%;
+  width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, var(--primary), #8b5cf6);
-  box-shadow: 0 0 20px var(--primary-glow);
-  transition: width 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shimmerSweep 4s 2s infinite ease-in-out;
 }
 
-.stats {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+@keyframes shimmerSweep {
+  to { left: 200%; }
 }
 
-.status {
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  color: rgba(255, 255, 255, 0.3);
+/* Activity Indicator */
+.pulseRing {
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  margin-top: 3rem;
+  opacity: 0;
+  animation: pulseLine 2s 1.5s infinite ease-in-out;
 }
 
-.percentage {
-  font-family: var(--font-heading);
-  font-size: 0.85rem;
-  font-weight: 900;
-  color: var(--primary);
+@keyframes pulseLine {
+  0%, 100% { transform: scaleX(0.5); opacity: 0.1; }
+  50% { transform: scaleX(1.5); opacity: 0.4; }
 }
 
-/* Background Effects */
-.backgroundEffects {
+/* Atmospheric Background */
+.nebula {
   position: absolute;
   inset: 0;
-  z-index: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 119, 255, 0.03) 0%, transparent 70%);
+  animation: drift 10s infinite alternate ease-in-out;
 }
 
-.glow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(0, 119, 255, 0.1) 0%, rgba(0,0,0,0) 70%);
-  animation: glowPulse 5s infinite ease-in-out;
-}
-
-.grid {
+.stardust {
   position: absolute;
   inset: 0;
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 100px 100px;
+  opacity: 0.05;
   mask-image: radial-gradient(circle at center, black, transparent);
 }
 
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
+@keyframes drift {
+  from { transform: scale(1) translate(-2%, -2%); }
+  to { transform: scale(1.1) translate(2%, 2%); }
 }
 
 @media (max-width: 768px) {
-  .logoText {
+  .mainLogo {
     font-size: 2.5rem;
+    letter-spacing: 0.1em;
   }
   .dot {
     width: 8px;
