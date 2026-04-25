@@ -89,10 +89,11 @@ export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
       const isMobile = canvasRatio < 1; 
 
       if (isMobile) {
-        // Fit to Width on Mobile to see the whole 'SINTRIFY' monitor
-        drawWidth = canvas.width;
-        drawHeight = canvas.width / imgRatio;
-        offsetX = 0;
+        // Fit to Width + Tiny Zoom to hide watermark
+        const mobileZoom = 1.05;
+        drawWidth = canvas.width * mobileZoom;
+        drawHeight = (canvas.width / imgRatio) * mobileZoom;
+        offsetX = (canvas.width - drawWidth) / 2;
         offsetY = (canvas.height - drawHeight) / 2;
       } else {
         // Cinematic Cover on Desktop
