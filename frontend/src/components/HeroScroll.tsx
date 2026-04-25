@@ -131,10 +131,6 @@ export default function HeroScroll() {
             <span className={styles.logoAccent}>IFY</span>
             <span className={styles.logoDot} />
           </div>
-          <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: `${loadingProgress}%` }} />
-          </div>
-          <div className={styles.loadingText}>Initializing Digital Ecosystem... {loadingProgress}%</div>
         </div>
       </div>
     );
