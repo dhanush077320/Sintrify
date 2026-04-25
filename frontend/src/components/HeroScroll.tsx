@@ -86,20 +86,28 @@ export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
       const imgRatio = img.width / img.height;
       let drawWidth, drawHeight, offsetX, offsetY;
 
-      // Dynamic Responsive Scaling: Smaller zoom on mobile to show more content
       const isMobile = canvasRatio < 1; 
-      const zoomFactor = isMobile ? 1.02 : 1.15; 
 
-      if (canvasRatio > imgRatio) {
-        drawWidth = canvas.width * zoomFactor;
-        drawHeight = (canvas.width / imgRatio) * zoomFactor;
-        offsetX = (canvas.width - drawWidth) / 2;
+      if (isMobile) {
+        // Fit to Width on Mobile to see the whole 'SINTRIFY' monitor
+        drawWidth = canvas.width;
+        drawHeight = canvas.width / imgRatio;
+        offsetX = 0;
         offsetY = (canvas.height - drawHeight) / 2;
       } else {
-        drawWidth = (canvas.height * imgRatio) * zoomFactor;
-        drawHeight = canvas.height * zoomFactor;
-        offsetX = (canvas.width - drawWidth) / 2;
-        offsetY = (canvas.height - drawHeight) / 2;
+        // Cinematic Cover on Desktop
+        const zoomFactor = 1.15; 
+        if (canvasRatio > imgRatio) {
+          drawWidth = canvas.width * zoomFactor;
+          drawHeight = (canvas.width / imgRatio) * zoomFactor;
+          offsetX = (canvas.width - drawWidth) / 2;
+          offsetY = (canvas.height - drawHeight) / 2;
+        } else {
+          drawWidth = (canvas.height * imgRatio) * zoomFactor;
+          drawHeight = canvas.height * zoomFactor;
+          offsetX = (canvas.width - drawWidth) / 2;
+          offsetY = (canvas.height - drawHeight) / 2;
+        }
       }
 
       context.clearRect(0, 0, canvas.width, canvas.height);
