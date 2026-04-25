@@ -86,7 +86,9 @@ export default function HeroScroll({ onProgress, onReady }: HeroScrollProps) {
       const imgRatio = img.width / img.height;
       let drawWidth, drawHeight, offsetX, offsetY;
 
-      const zoomFactor = 1.15; 
+      // Dynamic Responsive Scaling: Smaller zoom on mobile to show more content
+      const isMobile = canvasRatio < 1; 
+      const zoomFactor = isMobile ? 1.02 : 1.15; 
 
       if (canvasRatio > imgRatio) {
         drawWidth = canvas.width * zoomFactor;
