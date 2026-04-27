@@ -23,9 +23,15 @@ function App() {
   const [view, setView] = useState<"landing" | "login" | "admin" | "explore" | "faq" | "privacy" | "terms" | "startproject">("landing");
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isHeroLoading, setIsHeroLoading] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Scroll Lock while loading
   useEffect(() => {
+    if (!isMounted) return;
     if (isHeroLoading && view === "landing") {
       document.body.style.overflow = "hidden";
     } else {
@@ -60,6 +66,8 @@ function App() {
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  if (!isMounted) return null;
 
   return (
     <ThemeProvider>
